@@ -19,9 +19,9 @@
 	</properties>
 
 	<modules>
-		<module>persistance</module>
-		<module>service</module>
-		<module>presentation</module>
+		<module>mentorship2-persistance</module>
+		<module>mentorship2-service</module>
+		<module>mentorship2-presentation</module>
 	</modules>
 
 	<dependencyManagement>
@@ -117,7 +117,7 @@
 	</dependencyManagement>
 
 	<build>
-		<finalName>mentorship</finalName>
+		<finalName>mentorship2</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>

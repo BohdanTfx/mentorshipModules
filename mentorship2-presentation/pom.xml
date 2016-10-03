@@ -9,14 +9,14 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>presentation</artifactId>
+	<artifactId>mentorship2-presentation</artifactId>
 	<packaging>war</packaging>
-	<name>presentation Maven Webapp</name>
+	<name>mentorship2-presentation</name>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.epam</groupId>
-			<artifactId>service</artifactId>
+			<artifactId>mentorship2-service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -67,7 +67,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>presentation</finalName>
+		<finalName>mentorship2-presentation</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

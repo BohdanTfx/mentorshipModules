@@ -9,8 +9,8 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>persistance</artifactId>
-	<name>persistance</name>
+	<artifactId>mentorship2-persistance</artifactId>
+	<name>mentorship2-persistance</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

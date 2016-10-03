@@ -9,8 +9,8 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>service</artifactId>
-	<name>service</name>
+	<artifactId>mentorship2-service</artifactId>
+	<name>mentorship2-service</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,7 +19,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.epam</groupId>
-			<artifactId>persistance</artifactId>
+			<artifactId>mentorship2-persistance</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
