@@ -2,6 +2,15 @@ package com.epam.mentorship.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -12,19 +21,36 @@ import com.epam.mentorship.aspect.annotation.BeforeUpdate;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+@Entity
+@Table
 public class User extends BaseEntity<Long> {
+	private static final long serialVersionUID = -5521224528701477777L;
 	@XmlElement
+	@Column(name = "first_name")
 	private String firstName;
 	@XmlElement
+	@Column(name = "last_name")
 	private String lastName;
 	@XmlElement
+	@Column(name = "dob")
 	private Date dateOfBirth;
 	@XmlElement
+	@Column(name = "job")
+	@Enumerated(EnumType.STRING)
 	private JobTitle jobTitle;
+	@Column
 	private Date created;
+	@Column(name = "last_modified")
 	private Date lastModified;
+	@JoinColumn(name = "modificator_id")
+	@ManyToOne(cascade = CascadeType.ALL)
 	private User lastModifiedByUser;
+	@JoinColumn(name = "creator_id")
+	@ManyToOne(cascade = CascadeType.ALL)
 	private User createdByUser;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "mentorship_program_id")
+	private MentorshipProgram mentorshipProgram;
 
 	public Date getCreated() {
 		return created;
@@ -89,14 +115,14 @@ public class User extends BaseEntity<Long> {
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	
+
 	@BeforeUpdate
 	public void beforeUpdate() {
 		lastModified = new Date();
 	}
-	
+
 	@BeforeSave
-	public void beforeSave(){
+	public void beforeSave() {
 		created = new Date();
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.http.MediaType;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.accept.ContentNegotiationManager;
@@ -24,6 +25,7 @@ import com.epam.mentorship.model.MentorshipProgram;
 import com.epam.mentorship.model.User;
 
 @Configuration
+@ImportResource("persistance-config.xml")
 @ComponentScan("com.epam.mentorship")
 @EnableWebMvc
 @EnableAspectJAutoProxy
