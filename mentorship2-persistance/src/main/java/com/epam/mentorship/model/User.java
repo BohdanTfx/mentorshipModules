@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.epam.mentorship.aspect.annotation.BeforeSave;
 import com.epam.mentorship.aspect.annotation.BeforeUpdate;
+import com.epam.mentorship.enums.JobTitle;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)

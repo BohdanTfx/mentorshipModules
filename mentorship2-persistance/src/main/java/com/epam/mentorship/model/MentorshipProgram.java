@@ -1,5 +1,6 @@
 package com.epam.mentorship.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,6 +16,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.epam.mentorship.enums.Location;
+import com.epam.mentorship.enums.Technology;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -35,7 +39,51 @@ public class MentorshipProgram extends BaseEntity<Long> {
 	private Technology technology;
 	@XmlElement
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mentorshipProgram")
-	private List<User> participants;
+	private List<Participant> participants;
+	@XmlElement
+	@Column
+	@Enumerated(EnumType.STRING)
+	private Location location;
+	@Column
+	private Date startDate;
+	@Column
+	private Date endDate;
+	@Column
+	private boolean started;
+	@Column
+	private boolean finished;
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public boolean isStarted() {
+		return started;
+	}
+
+	public void setStarted(boolean started) {
+		this.started = started;
+	}
+
+	public boolean isFinished() {
+		return finished;
+	}
+
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
 
 	public String getTitle() {
 		return title;
@@ -45,11 +93,11 @@ public class MentorshipProgram extends BaseEntity<Long> {
 		this.title = title;
 	}
 
-	public List<User> getParticipants() {
+	public List<Participant> getParticipants() {
 		return participants;
 	}
 
-	public void setParticipants(List<User> participants) {
+	public void setParticipants(List<Participant> participants) {
 		this.participants = participants;
 	}
 
@@ -67,5 +115,13 @@ public class MentorshipProgram extends BaseEntity<Long> {
 
 	public void setTechnology(Technology technology) {
 		this.technology = technology;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 }

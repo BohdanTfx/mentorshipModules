@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.epam.mentorship.model.Technology;
+import com.epam.mentorship.enums.Technology;
 
 public class MentorshipProgramDto {
 	@NotEmpty

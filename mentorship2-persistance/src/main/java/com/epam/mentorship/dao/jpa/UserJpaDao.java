@@ -3,7 +3,7 @@ package com.epam.mentorship.dao.jpa;
 import java.util.Date;
 
 import com.epam.mentorship.dao.UserDao;
-import com.epam.mentorship.model.JobTitle;
+import com.epam.mentorship.enums.JobTitle;
 import com.epam.mentorship.model.User;
 
 public class UserJpaDao extends GenericJpaDao<User, Long> implements UserDao {

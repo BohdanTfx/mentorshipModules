@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.epam.mentorship.model.JobTitle;
+import com.epam.mentorship.enums.JobTitle;
 
 public class UserDto {
 	@NotEmpty

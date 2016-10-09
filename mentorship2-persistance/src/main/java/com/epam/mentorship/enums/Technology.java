@@ -1,4 +1,4 @@
-package com.epam.mentorship.model;
+package com.epam.mentorship.enums;
 
 public enum Technology {
 	JAVA, JAVASCRIPT;
