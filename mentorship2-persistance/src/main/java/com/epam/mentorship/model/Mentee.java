@@ -28,6 +28,7 @@ public class Mentee extends Participant {
 	private boolean finished;
 	@Column(name = "successfully_finished")
 	private Boolean successfullyFinished;
+	@Column(name = "mentorship_duration")
 	private int mentorshipDuration;
 
 	public Date getEndDate() {

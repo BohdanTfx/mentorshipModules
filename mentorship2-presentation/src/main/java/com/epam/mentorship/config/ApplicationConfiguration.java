@@ -25,7 +25,7 @@ import com.epam.mentorship.model.MentorshipProgram;
 import com.epam.mentorship.model.User;
 
 @Configuration
-@ImportResource("persistance-config.xml")
+@ImportResource("classpath:persistance-config.xml")
 @ComponentScan("com.epam.mentorship")
 @EnableWebMvc
 @EnableAspectJAutoProxy
