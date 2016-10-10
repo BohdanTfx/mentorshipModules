@@ -9,6 +9,8 @@ public interface MentorshipProgramService {
 
 	MentorshipProgram update(MentorshipProgram entity);
 
+	void delete(MentorshipProgram mentorshipProgram);
+	
 	void delete(Long id);
 
 	MentorshipProgram findById(Long id);

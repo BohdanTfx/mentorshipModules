@@ -24,8 +24,12 @@ public class UserServiceImpl implements UserService{
 		return userDao.update(entity);
 	}
 
+	public void delete(User user) {
+		userDao.delete(user);
+	}
+	
 	public void delete(Long id) {
-		userDao.delete(id);
+		userDao.delete(userDao.getById(id));
 	}
 
 	public User findById(Long id) {

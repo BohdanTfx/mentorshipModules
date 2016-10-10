@@ -22,8 +22,12 @@ public class MentorshipProgramServiceImpl implements MentorshipProgramService {
 		return mentorshipProgramDao.update(entity);
 	}
 
+	public void delete(MentorshipProgram mentorshipProgram) {
+		mentorshipProgramDao.delete(mentorshipProgram);
+	}
+
 	public void delete(Long id) {
-		mentorshipProgramDao.delete(id);
+		mentorshipProgramDao.delete(mentorshipProgramDao.getById(id));
 	}
 
 	public MentorshipProgram findById(Long id) {

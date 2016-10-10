@@ -1,7 +1,6 @@
 package com.epam.mentorship.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.epam.mentorship.model.MentorshipProgram;
-import com.epam.mentorship.model.Participant;
-import com.epam.mentorship.model.User;
 import com.epam.mentorship.model.dto.ApiResponse;
 import com.epam.mentorship.model.dto.MentorshipProgramDto;
 import com.epam.mentorship.service.MentorshipProgramService;

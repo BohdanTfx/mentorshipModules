@@ -9,6 +9,10 @@ import com.epam.mentorship.model.User;
 public class UserJpaDao extends GenericJpaDao<User, Long> implements UserDao {
 	private static final long serialVersionUID = 2406387785183079071L;
 
+	public UserJpaDao() {
+		super(User.class);
+	}
+
 	public void init() {
 		User user = new User();
 		user.setId(50L);
@@ -17,7 +21,7 @@ public class UserJpaDao extends GenericJpaDao<User, Long> implements UserDao {
 		user.setLastName("None");
 		user.setJobTitle(JobTitle.JUNIOR);
 		save(user);
-		
+
 		User user1 = new User();
 		user1.setId(20L);
 		user1.setDateOfBirth(new Date());
@@ -25,7 +29,7 @@ public class UserJpaDao extends GenericJpaDao<User, Long> implements UserDao {
 		user1.setLastName("Tea");
 		user1.setJobTitle(JobTitle.SENIOR);
 		save(user1);
-		
+
 		User user2 = new User();
 		user2.setId(111L);
 		user2.setDateOfBirth(new Date());

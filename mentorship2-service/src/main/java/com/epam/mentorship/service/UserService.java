@@ -10,6 +10,8 @@ public interface UserService {
 
 	User update(User entity);
 
+	void delete(User entity);
+
 	void delete(Long id);
 
 	User findById(Long id);

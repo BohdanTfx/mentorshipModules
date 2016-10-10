@@ -3,9 +3,14 @@
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+        
+	<bean id="userDao" class="com.epam.mentorship.dao.jpa.UserJpaDao"
+		init-method="init" />
 
-	<bean id="userDao" class="com.epam.mentorship.dao.jpa.UserJpaDao" init-method="init"/>
-	
-	<bean id="mentorshipProgramDao" class="com.epam.mentorship.dao.jpa.MentorshipProgramJpaDao"/>
+	<bean id="mentorshipProgramDao" class="com.epam.mentorship.dao.jpa.MentorshipProgramJpaDao" />
+
+	<bean id="mentorDao" class="com.epam.mentorship.dao.jpa.MentorJpaDao" />
+
+	<bean id="menteeDao" class="com.epam.mentorship.dao.jpa.MenteeJpaDao" />
 
 </beans>

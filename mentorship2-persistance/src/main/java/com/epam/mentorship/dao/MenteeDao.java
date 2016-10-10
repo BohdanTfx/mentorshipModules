@@ -11,5 +11,5 @@ public interface MenteeDao extends GenericDao<Mentee, Long> {
 
 	List<Mentee> filterMentees(boolean descendingOrder, int startPosition, int itemsNumber);
 
-	Double getSuccessfulCompletionStatistic(Date startDate, Date endDate);
+	Double getFinishStatistic(Date startDate, Date endDate, boolean successfullyFinished);
 }

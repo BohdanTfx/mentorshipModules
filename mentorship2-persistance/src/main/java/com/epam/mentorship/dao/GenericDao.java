@@ -11,7 +11,7 @@ public interface GenericDao<T extends BaseEntity<ID>, ID> extends Serializable {
 
 	T update(T entity);
 
-	void delete(ID id);
+	void delete(T entity);
 
 	T getById(ID id);
 
