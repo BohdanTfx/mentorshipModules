@@ -4,10 +4,12 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -50,7 +52,7 @@ public class User extends BaseEntity<Long> {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private User createdByUser;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "mentorship_program_id")
+	@JoinColumn(name = "mentorship_program_id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
 	private MentorshipProgram mentorshipProgram;
 
 	public Date getCreated() {

@@ -3,9 +3,11 @@ package com.epam.mentorship.model;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -13,8 +15,8 @@ import javax.persistence.ManyToOne;
 @DiscriminatorValue("mentee")
 public class Mentee extends Participant {
 	private static final long serialVersionUID = 4805639326935214139L;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "mentor_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "mentor_id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
 	private Mentor mentor;
 	@Column
 	private boolean active;
