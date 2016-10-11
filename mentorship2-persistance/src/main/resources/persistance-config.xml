@@ -12,7 +12,7 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="${db.url}" />
-		<property name="user" value="${db.user}" />
+		<property name="username" value="${db.user}" />
 		<property name="password" value="${db.password}" />
 	</bean>
 
@@ -23,12 +23,12 @@
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
-		<!-- <property name="jpaProperties"> -->
-		<!-- <props> -->
-		<!-- <prop key="hibernate.hbm2ddl.auto">validate</prop> -->
-		<!-- <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop> -->
-		<!-- </props> -->
-		<!-- </property> -->
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+			</props>
+		</property>
 	</bean>
 
 	<bean id="userDao" class="com.epam.mentorship.dao.jpa.UserJpaDao"
