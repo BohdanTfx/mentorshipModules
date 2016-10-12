@@ -1,7 +1,11 @@
 package com.epam.mentorship.config;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.xml.bind.Marshaller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,6 +14,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.http.MediaType;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
@@ -29,6 +34,7 @@ import com.epam.mentorship.model.User;
 @ComponentScan("com.epam.mentorship")
 @EnableWebMvc
 @EnableAspectJAutoProxy
+@EnableTransactionManagement
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
@@ -47,6 +53,9 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 		List<View> defaultViews = new ArrayList<>();
 		defaultViews.add(new MappingJackson2JsonView());
 		Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
+		Map<String, Object> marshallerProperties = new HashMap<>();
+		marshallerProperties.put(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		jaxb2Marshaller.setMarshallerProperties(marshallerProperties);
 		jaxb2Marshaller.setClassesToBeBound(User.class, MentorshipProgram.class);
 		defaultViews.add(new MarshallingView(jaxb2Marshaller));
 

@@ -1,20 +1,14 @@
 package com.epam.mentorship.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,26 +18,16 @@ import com.epam.mentorship.model.MentorshipProgram;
 import com.epam.mentorship.model.dto.ApiResponse;
 import com.epam.mentorship.model.dto.MentorshipProgramDto;
 import com.epam.mentorship.service.MentorshipProgramService;
-import com.epam.mentorship.service.UserService;
 import com.epam.mentorship.util.DtoEntityConverter;
 
 @Controller
-@RequestMapping(path = "/api/mentorship", produces = { MediaType.APPLICATION_JSON_VALUE,
-		MediaType.APPLICATION_XML_VALUE })
+@RequestMapping(path = "/api/mentorship")
 public class MentorshipProgramController {
 	@Autowired
 	private MentorshipProgramService mentorshipProgramService;
-	@Autowired
-	private UserService userService;
+
 	@Autowired
 	private DtoEntityConverter dtoEntityConverter;
-
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<ApiResponse<MentorshipProgram>> createMentorshipProgram(
@@ -73,29 +57,33 @@ public class MentorshipProgramController {
 				new ApiResponse<>(mentorshipProgramService.update(entity), null), HttpStatus.OK);
 	}
 
-//	@RequestMapping(path = "/{programId}/participants/{userId}", method = RequestMethod.PUT)
-//	public ResponseEntity<ApiResponse<MentorshipProgram>> addParticipant(@PathVariable("programId") Long programId,
-//			@PathVariable("userId") Long userId) {
-//
-//		MentorshipProgram entity = mentorshipProgramService.findById(programId);
-//		if (entity == null) {
-//			return new ResponseEntity<ApiResponse<MentorshipProgram>>(HttpStatus.BAD_REQUEST);
-//		}
-//		User user = userService.findById(userId);
-//		if (user == null) {
-//			return new ResponseEntity<ApiResponse<MentorshipProgram>>(HttpStatus.BAD_REQUEST);
-//		}
-//
-//		List<Participant> participants = entity.getParticipants();
-//		if (participants == null) {
-//			participants = new ArrayList<>();
-//		}
-//
-//		participants.add(user);
-//		entity.setParticipants(participants);
-//		mentorshipProgramService.update(entity);
-//		return new ResponseEntity<>(HttpStatus.OK);
-//	}
+	// @RequestMapping(path = "/{programId}/participants/{userId}", method =
+	// RequestMethod.PUT)
+	// public ResponseEntity<ApiResponse<MentorshipProgram>>
+	// addParticipant(@PathVariable("programId") Long programId,
+	// @PathVariable("userId") Long userId) {
+	//
+	// MentorshipProgram entity = mentorshipProgramService.findById(programId);
+	// if (entity == null) {
+	// return new
+	// ResponseEntity<ApiResponse<MentorshipProgram>>(HttpStatus.BAD_REQUEST);
+	// }
+	// User user = userService.findById(userId);
+	// if (user == null) {
+	// return new
+	// ResponseEntity<ApiResponse<MentorshipProgram>>(HttpStatus.BAD_REQUEST);
+	// }
+	//
+	// List<Participant> participants = entity.getParticipants();
+	// if (participants == null) {
+	// participants = new ArrayList<>();
+	// }
+	//
+	// participants.add(user);
+	// entity.setParticipants(participants);
+	// mentorshipProgramService.update(entity);
+	// return new ResponseEntity<>(HttpStatus.OK);
+	// }
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<MentorshipProgram> findById(@PathVariable Long id) {

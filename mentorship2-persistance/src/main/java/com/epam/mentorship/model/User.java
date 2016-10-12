@@ -15,29 +15,28 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.epam.mentorship.aspect.annotation.BeforeSave;
 import com.epam.mentorship.aspect.annotation.BeforeUpdate;
 import com.epam.mentorship.enums.JobTitle;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="id")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class User extends BaseEntity<Long> {
 	private static final long serialVersionUID = -5521224528701477777L;
-	@XmlElement
 	@Column(name = "first_name")
 	private String firstName;
-	@XmlElement
 	@Column(name = "last_name")
 	private String lastName;
-	@XmlElement
 	@Column(name = "dob")
 	private Date dateOfBirth;
-	@XmlElement
 	@Column(name = "job")
 	@Enumerated(EnumType.STRING)
 	private JobTitle jobTitle;
@@ -47,11 +46,13 @@ public class User extends BaseEntity<Long> {
 	private Date lastModified;
 	@JoinColumn(name = "modificator_id")
 	@ManyToOne(cascade = CascadeType.ALL)
+	@XmlTransient
 	private User lastModifiedByUser;
 	@JoinColumn(name = "creator_id")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@XmlTransient
 	private User createdByUser;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "mentorship_program_id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
 	private MentorshipProgram mentorshipProgram;
 
@@ -127,5 +128,14 @@ public class User extends BaseEntity<Long> {
 	@BeforeSave
 	public void beforeSave() {
 		created = new Date();
+		lastModified = created;
+	}
+
+	public MentorshipProgram getMentorshipProgram() {
+		return mentorshipProgram;
+	}
+
+	public void setMentorshipProgram(MentorshipProgram mentorshipProgram) {
+		this.mentorshipProgram = mentorshipProgram;
 	}
 }

@@ -48,6 +48,8 @@ public class UserController {
 		}
 
 		User entity = dtoEntityConverter.convert(userDto);
+		entity.setCreatedByUser(entity);
+		entity.setLastModifiedByUser(entity);
 		return new ResponseEntity<>(new ApiResponse<>(userService.save(entity), null), HttpStatus.OK);
 	}
 

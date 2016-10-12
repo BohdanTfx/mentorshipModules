@@ -6,11 +6,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.epam.mentorship.aspect.annotation.Loggable;
 import com.epam.mentorship.dao.GenericDao;
 import com.epam.mentorship.model.BaseEntity;
 
 @Loggable
+@Transactional
 public class GenericJpaDao<T extends BaseEntity<ID>, ID extends Serializable> implements GenericDao<T, ID> {
 	private static final long serialVersionUID = 1L;
 
