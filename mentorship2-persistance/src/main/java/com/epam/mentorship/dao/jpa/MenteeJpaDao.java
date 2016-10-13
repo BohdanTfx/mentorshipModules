@@ -44,7 +44,7 @@ public class MenteeJpaDao extends GenericJpaDao<Mentee, Long> implements MenteeD
 		CriteriaQuery<Long> queryForFiltering = builder.createQuery(Long.class);
 		Root<Mentee> root = queryForFiltering.from(Mentee.class);
 		queryForFiltering.select(builder.countDistinct(root))
-				.where(builder.and(builder.between(root.<Date> get("endDate"), startDate, endDate),
+				.where(builder.and(builder.between(root.<Date>get("endDate"), startDate, endDate),
 						builder.equal(root.get("successfullyFinished"), successfullyFinished)));
 		Long filteredMenteesCount = getEntityManager().createQuery(queryForFiltering).getSingleResult();
 

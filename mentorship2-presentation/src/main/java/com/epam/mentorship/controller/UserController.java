@@ -31,7 +31,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	DtoEntityConverter dtoEntityConverter;
+	private DtoEntityConverter dtoEntityConverter;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
