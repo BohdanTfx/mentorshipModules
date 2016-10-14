@@ -2,8 +2,10 @@ package com.epam.mentorship.service.impl;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.epam.mentorship.dao.MentorDao;
 import com.epam.mentorship.model.Mentor;
@@ -36,8 +38,11 @@ public class MentorServiceImpl implements MentorService {
 	}
 
 	@Override
+	@Transactional
 	public Mentor findById(Long id) {
-		return mentorDao.getById(id);
+		Mentor mentor = mentorDao.getById(id);
+		Hibernate.initialize(mentor.getMentees());
+		return mentor;
 	}
 
 	@Override

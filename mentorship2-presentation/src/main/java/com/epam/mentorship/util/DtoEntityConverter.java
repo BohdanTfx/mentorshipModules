@@ -22,7 +22,10 @@ public class DtoEntityConverter {
 	}
 	
 	public MentorshipProgram convert(MentorshipProgramDto mentorshipProgramDto) {
-		MentorshipProgram mentorshipProgram = mapper.map(mentorshipProgramDto, MentorshipProgram.class);
+		MentorshipProgram mentorshipProgram = new MentorshipProgram();
+		mentorshipProgram.setLocation(mentorshipProgramDto.getLocation());
+		mentorshipProgram.setTechnology(mentorshipProgramDto.getTechnology());
+		mentorshipProgram.setTitle(mentorshipProgramDto.getTitle());
 		mentorshipProgram.setHead(userService.findById(mentorshipProgramDto.getHeadId()));
 		return mentorshipProgram;
 	}

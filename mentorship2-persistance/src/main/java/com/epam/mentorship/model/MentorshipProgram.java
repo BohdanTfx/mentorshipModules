@@ -14,9 +14,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.epam.mentorship.aspect.annotation.BeforeSave;
 import com.epam.mentorship.enums.Location;
 import com.epam.mentorship.enums.Technology;
 
@@ -26,21 +26,16 @@ import com.epam.mentorship.enums.Technology;
 @Table(name = "mentorship_program")
 public class MentorshipProgram extends BaseEntity<Long> {
 	private static final long serialVersionUID = 2323549146427836149L;
-	@XmlElement
 	@Column
 	private String title;
-	@XmlElement
 	@OneToOne
 	@JoinColumn(name = "head_id")
 	private User head;
-	@XmlElement
 	@Column
 	@Enumerated(EnumType.STRING)
 	private Technology technology;
-	@XmlElement
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mentorshipProgram")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "mentorshipProgram")
 	private List<Participant> participants;
-	@XmlElement
 	@Column
 	@Enumerated(EnumType.STRING)
 	private Location location;
@@ -123,5 +118,11 @@ public class MentorshipProgram extends BaseEntity<Long> {
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+
+	@BeforeSave
+	public void beforeSave() {
+		started = true;
+		startDate = new Date();
 	}
 }

@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,14 +32,19 @@ public class MentorshipProgramController {
 	private DtoEntityConverter dtoEntityConverter;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<ApiResponse<MentorshipProgram>> createMentorshipProgram(
-			@RequestBody @Valid MentorshipProgramDto mentorshipProgramDto, BindingResult bindingResult) {
+	public String createMentorshipProgram(@RequestBody @Valid MentorshipProgramDto mentorshipProgramDto,
+			BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
-			return new ResponseEntity<>(new ApiResponse<>(null, bindingResult.getAllErrors()), HttpStatus.OK);
+			model.addAttribute("errors", bindingResult.getAllErrors());
+			return "mentorshipProgram";
 		}
 
 		MentorshipProgram entity = dtoEntityConverter.convert(mentorshipProgramDto);
-		return new ResponseEntity<>(new ApiResponse<>(mentorshipProgramService.save(entity), null), HttpStatus.OK);
+		
+		MentorshipProgram mentorshipProgram = mentorshipProgramService.save(entity);
+		mentorshipProgram.getParticipants().size();
+		model.addAttribute("mentorshipProgram", mentorshipProgram);
+		return "mentorshipProgram";
 	}
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.PUT)
@@ -57,37 +64,11 @@ public class MentorshipProgramController {
 				new ApiResponse<>(mentorshipProgramService.update(entity), null), HttpStatus.OK);
 	}
 
-	// @RequestMapping(path = "/{programId}/participants/{userId}", method =
-	// RequestMethod.PUT)
-	// public ResponseEntity<ApiResponse<MentorshipProgram>>
-	// addParticipant(@PathVariable("programId") Long programId,
-	// @PathVariable("userId") Long userId) {
-	//
-	// MentorshipProgram entity = mentorshipProgramService.findById(programId);
-	// if (entity == null) {
-	// return new
-	// ResponseEntity<ApiResponse<MentorshipProgram>>(HttpStatus.BAD_REQUEST);
-	// }
-	// User user = userService.findById(userId);
-	// if (user == null) {
-	// return new
-	// ResponseEntity<ApiResponse<MentorshipProgram>>(HttpStatus.BAD_REQUEST);
-	// }
-	//
-	// List<Participant> participants = entity.getParticipants();
-	// if (participants == null) {
-	// participants = new ArrayList<>();
-	// }
-	//
-	// participants.add(user);
-	// entity.setParticipants(participants);
-	// mentorshipProgramService.update(entity);
-	// return new ResponseEntity<>(HttpStatus.OK);
-	// }
-
 	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<MentorshipProgram> findById(@PathVariable Long id) {
-		return new ResponseEntity<MentorshipProgram>(mentorshipProgramService.findById(id), HttpStatus.OK);
+	public String findById(@PathVariable Long id, Model model) {
+		MentorshipProgram mentorshipProgram = mentorshipProgramService.findById(id);
+		model.addAttribute("mentorshipProgram", mentorshipProgram);
+		return "mentorshipProgram";
 	}
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.DELETE)

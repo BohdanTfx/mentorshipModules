@@ -4,12 +4,9 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -26,7 +23,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User extends BaseEntity<Long> {
@@ -52,9 +49,6 @@ public class User extends BaseEntity<Long> {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@XmlTransient
 	private User createdByUser;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	@JoinColumn(name = "mentorship_program_id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
-	private MentorshipProgram mentorshipProgram;
 
 	public Date getCreated() {
 		return created;
@@ -129,13 +123,5 @@ public class User extends BaseEntity<Long> {
 	public void beforeSave() {
 		created = new Date();
 		lastModified = created;
-	}
-
-	public MentorshipProgram getMentorshipProgram() {
-		return mentorshipProgram;
-	}
-
-	public void setMentorshipProgram(MentorshipProgram mentorshipProgram) {
-		this.mentorshipProgram = mentorshipProgram;
 	}
 }

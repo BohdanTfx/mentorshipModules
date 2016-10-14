@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.epam.mentorship.enums.Location;
 import com.epam.mentorship.enums.Technology;
 
 public class MentorshipProgramDto {
@@ -16,6 +17,8 @@ public class MentorshipProgramDto {
 	private Long headId;
 	@NotNull
 	private Technology technology;
+	@NotNull
+	private Location location;
 
 	public String getTitle() {
 		return title;
@@ -39,5 +42,13 @@ public class MentorshipProgramDto {
 
 	public void setTechnology(Technology technology) {
 		this.technology = technology;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 }

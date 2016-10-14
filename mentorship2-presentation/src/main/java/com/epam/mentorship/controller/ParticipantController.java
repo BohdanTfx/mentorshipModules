@@ -15,6 +15,7 @@ import com.epam.mentorship.model.Mentee;
 import com.epam.mentorship.model.Mentor;
 import com.epam.mentorship.service.MenteeService;
 import com.epam.mentorship.service.MentorService;
+import com.epam.mentorship.service.MentorshipProgramService;
 import com.epam.mentorship.service.UserService;
 
 @Controller
@@ -26,19 +27,23 @@ public class ParticipantController {
 	private MenteeService menteeService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private MentorshipProgramService mentorshipProgramService;
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String createMentor(@RequestParam Long userId, Model model) {
+	@RequestMapping(path = "/{mentorshipProgramId}/mentor", method = RequestMethod.POST)
+	public String createMentor(@PathVariable Long mentorshipProgramId, @RequestParam Long userId, Model model) {
 		Mentor mentor = new Mentor();
 		mentor.setUser(userService.findById(userId));
+		mentor.setMentorshipProgram(mentorshipProgramService.findById(mentorshipProgramId));
 
 		model.addAttribute("mentor", mentorService.create(mentor));
-		return "mentor";
+		return "mentorProfile";
 	}
 
 	@RequestMapping(path = "/mentor/{id}", method = RequestMethod.GET)
 	public String findMentor(@PathVariable Long id, Model model) {
-		model.addAttribute("mentor", mentorService.findById(id));
+		Mentor mentor = mentorService.findById(id);
+		model.addAttribute("mentor", mentor);
 		return "mentorProfile";
 	}
 
@@ -55,7 +60,7 @@ public class ParticipantController {
 	}
 
 	@RequestMapping(path = "/mentor/{mentorId}/mentees/{menteeId}", method = RequestMethod.DELETE)
-	public String addMentees(@PathVariable Long mentorId, @PathVariable Long menteeId, Model model) {
+	public String removeMentees(@PathVariable Long mentorId, @PathVariable Long menteeId, Model model) {
 		Mentor mentor = mentorService.findById(mentorId);
 		List<Mentee> mentees = mentor.getMentees();
 		for (Iterator<Mentee> iterator = mentees.iterator(); iterator.hasNext();) {
