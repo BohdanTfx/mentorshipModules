@@ -26,6 +26,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.servlet.view.xml.MarshallingView;
 
+import com.epam.mentorship.model.Mentee;
+import com.epam.mentorship.model.Mentor;
 import com.epam.mentorship.model.MentorshipProgram;
 import com.epam.mentorship.model.User;
 
@@ -56,7 +58,7 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 		Map<String, Object> marshallerProperties = new HashMap<>();
 		marshallerProperties.put(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		jaxb2Marshaller.setMarshallerProperties(marshallerProperties);
-		jaxb2Marshaller.setClassesToBeBound(User.class, MentorshipProgram.class);
+		jaxb2Marshaller.setClassesToBeBound(User.class, MentorshipProgram.class, Mentor.class, Mentee.class);
 		defaultViews.add(new MarshallingView(jaxb2Marshaller));
 
 		resolver.setDefaultViews(defaultViews);

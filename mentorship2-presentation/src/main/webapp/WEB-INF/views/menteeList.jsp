@@ -31,7 +31,7 @@
 		<div>Active: ${mentee.active eq true ? 'Yes' : 'No'}</div>
 		<c:if test="${mentee.started eq true}">
 			<div>
-				Start info: <b>${mentee.startDate}</b>
+				Start info: <b>${mentee.startedDate}</b>
 			</div>
 		</c:if>
 		<c:if test="${mentee.finished eq true}">

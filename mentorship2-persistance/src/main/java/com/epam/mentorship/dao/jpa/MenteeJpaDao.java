@@ -24,7 +24,8 @@ public class MenteeJpaDao extends GenericJpaDao<Mentee, Long> implements MenteeD
 		CriteriaQuery<Mentee> query = builder.createQuery(Mentee.class);
 		Root<Mentee> root = query.from(Mentee.class);
 		query.select(root)
-				.where(builder.and(builder.equal(root.get("location"), location), builder.isNull(root.get("mentor"))));
+				.where(builder.and(builder.equal(root.get("mentorshipProgram").get("location"), location), builder.isNull(root.get("mentor"))));
+		
 		return getEntityManager().createQuery(query).getResultList();
 	}
 
@@ -42,15 +43,15 @@ public class MenteeJpaDao extends GenericJpaDao<Mentee, Long> implements MenteeD
 	public Double getFinishStatistic(Date startDate, Date endDate, boolean successfullyFinished) {
 		CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<Long> queryForFiltering = builder.createQuery(Long.class);
-		Root<Mentee> root = queryForFiltering.from(Mentee.class);
-		queryForFiltering.select(builder.countDistinct(root))
-				.where(builder.and(builder.between(root.<Date>get("endDate"), startDate, endDate),
-						builder.equal(root.get("successfullyFinished"), successfullyFinished)));
+		Root<Mentee> filteredRoot = queryForFiltering.from(Mentee.class);
+		queryForFiltering.select(builder.countDistinct(filteredRoot))
+				.where(builder.and(builder.between(filteredRoot.<Date>get("endDate"), startDate, endDate),
+						builder.equal(filteredRoot.get("successfullyFinished"), successfullyFinished)));
 		Long filteredMenteesCount = getEntityManager().createQuery(queryForFiltering).getSingleResult();
 
 		CriteriaQuery<Long> queryForCountAll = builder.createQuery(Long.class);
-		root = queryForFiltering.from(Mentee.class);
-		queryForCountAll.select(builder.countDistinct(root));
+		Root<Mentee> allRoot = queryForCountAll.from(Mentee.class);
+		queryForCountAll.select(builder.countDistinct(allRoot));
 		Long allMenteesCount = getEntityManager().createQuery(queryForCountAll).getSingleResult();
 		return filteredMenteesCount / (double) allMenteesCount;
 	}

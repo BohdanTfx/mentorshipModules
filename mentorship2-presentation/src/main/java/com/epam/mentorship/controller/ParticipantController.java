@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -146,7 +147,7 @@ public class ParticipantController {
 	}
 
 	@RequestMapping(path = "statistic", method = RequestMethod.GET)
-	public Double findMenteesByLocation(@RequestParam(required = false) Date startDate,
+	public ResponseEntity<Double> findMenteesByLocation(@RequestParam(required = false) Date startDate,
 			@RequestParam(required = false) Date endDate,
 			@RequestParam(required = false) Boolean successfullyFinished) {
 		startDate = startDate == null ? new GregorianCalendar(1990, 1, 1).getTime() : startDate;
@@ -154,6 +155,6 @@ public class ParticipantController {
 		successfullyFinished = successfullyFinished == null ? true : successfullyFinished;
 
 		Double result = menteeService.getFinishStatistic(startDate, endDate, successfullyFinished);
-		return result;
+		return ResponseEntity.ok(result);
 	}
 }
