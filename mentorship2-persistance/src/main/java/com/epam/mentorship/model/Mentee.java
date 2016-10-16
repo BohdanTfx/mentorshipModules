@@ -11,12 +11,15 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @DiscriminatorValue("mentee")
 public class Mentee extends Participant {
 	private static final long serialVersionUID = 4805639326935214139L;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "mentor_id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
+	@JsonBackReference("mentor-mentee")
 	private Mentor mentor;
 	@Column
 	private boolean active;

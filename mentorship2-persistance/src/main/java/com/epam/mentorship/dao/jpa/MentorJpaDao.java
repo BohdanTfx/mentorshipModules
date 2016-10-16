@@ -19,7 +19,7 @@ public class MentorJpaDao extends GenericJpaDao<Mentor, Long> implements MentorD
 	public List<Mentor> getMentorsByMenteesAmount(int menteesAmount, boolean onlyActive) {
 		Query query = getEntityManager()
 				.createQuery("Select m from " + getPersistanceClass().getSimpleName()
-						+ " m where size(m.mentees) > :menteesAmount and m.mentees.active = :onlyActive", Mentor.class)
+						+ " m join fetch m.mentees mentee where size(m.mentees) > :menteesAmount and mentee.active = :onlyActive", Mentor.class)
 				.setParameter("menteesAmount", menteesAmount).setParameter("onlyActive", onlyActive);
 		return query.getResultList();
 	}
