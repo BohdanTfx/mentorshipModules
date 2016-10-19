@@ -16,7 +16,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.epam</groupId>
-			<artifactId>mentorship2-service</artifactId>
+			<artifactId>mentorship2-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

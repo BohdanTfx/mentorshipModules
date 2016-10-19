@@ -1,4 +1,4 @@
-package com.epam.mentorship.model.dto;
+package com.epam.mentorship.api.model.dto;
 
 import java.util.List;
 
@@ -8,6 +8,14 @@ public class ApiResponse<T> {
 	private T body;
 	private List<ObjectError> errors;
 
+	public ApiResponse(List<ObjectError> errors) {
+		this.errors = errors;
+	}
+	
+	public ApiResponse(T body) {
+		this.body = body;
+	}
+	
 	public ApiResponse(T body, List<ObjectError> errors) {
 		this.body = body;
 		this.errors = errors;

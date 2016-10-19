@@ -1,4 +1,4 @@
-package com.epam.mentorship.model.dto;
+package com.epam.mentorship.api.model.dto;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

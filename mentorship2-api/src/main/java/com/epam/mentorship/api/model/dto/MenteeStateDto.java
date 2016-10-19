@@ -1,4 +1,4 @@
-package com.epam.mentorship.model.dto;
+package com.epam.mentorship.api.model.dto;
 
 public class MenteeStateDto {
 	private Boolean active;
