@@ -24,6 +24,7 @@ public class ApplicationInitializer implements WebApplicationInitializer {
 
 	private AnnotationConfigWebApplicationContext getContext() {
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+		context.register(ApplicationConfiguration.class);
 		context.setConfigLocation("com.epam.mentorship.config");
 		return context;
 	}

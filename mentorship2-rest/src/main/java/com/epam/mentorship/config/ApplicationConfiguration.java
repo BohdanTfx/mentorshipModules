@@ -22,7 +22,6 @@ import org.springframework.web.servlet.config.annotation.ContentNegotiationConfi
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.servlet.view.xml.MarshallingView;
 
@@ -41,19 +40,18 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-		configurer.favorPathExtension(true).ignoreAcceptHeader(true).defaultContentType(MediaType.TEXT_HTML)
-				.useJaf(false).mediaType("json", MediaType.APPLICATION_JSON)
-				.mediaType("xml", MediaType.APPLICATION_XML);
+		configurer.favorPathExtension(true).ignoreAcceptHeader(true).defaultContentType(MediaType.APPLICATION_JSON)
+				.useJaf(false).mediaType("xml", MediaType.APPLICATION_XML);
 	}
 
 	@Bean
 	public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
 		ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
 		resolver.setContentNegotiationManager(manager);
-		resolver.setOrder(1);
 
 		List<View> defaultViews = new ArrayList<>();
 		defaultViews.add(new MappingJackson2JsonView());
+
 		Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
 		Map<String, Object> marshallerProperties = new HashMap<>();
 		marshallerProperties.put(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -62,15 +60,6 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 		defaultViews.add(new MarshallingView(jaxb2Marshaller));
 
 		resolver.setDefaultViews(defaultViews);
-		return resolver;
-	}
-
-	@Bean
-	public ViewResolver internalResourceViewResolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setOrder(2);
-		resolver.setPrefix("/WEB-INF/views/");
-		resolver.setSuffix(".jsp");
 		return resolver;
 	}
 }

@@ -9,18 +9,18 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>mentorship2-api</artifactId>
-	<name>mentorship2-api</name>
+	<artifactId>mentorship2-api-client</artifactId>
+	<name>mentorship2-api-client</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.epam</groupId>
 			<artifactId>mentorship2-service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
 		</dependency>
 
 		<dependency>
@@ -37,8 +37,4 @@
 			<artifactId>log4j</artifactId>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<finalName>mentorship2-api</finalName>
-	</build>
 </project>

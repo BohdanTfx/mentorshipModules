@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.epam.mentorship.api.facade.MentorshipProgramApiService;
+import com.epam.mentorship.api.client.MentorshipProgramApiClient;
 import com.epam.mentorship.api.model.dto.ApiResponse;
 import com.epam.mentorship.api.model.dto.MentorshipProgramDto;
 import com.epam.mentorship.model.MentorshipProgram;
@@ -19,7 +19,7 @@ import com.epam.mentorship.model.MentorshipProgram;
 @RequestMapping(path = "/mentorship")
 public class MentorshipProgramController {
 	@Autowired
-	private MentorshipProgramApiService mentorshipProgramApiService;
+	private MentorshipProgramApiClient mentorshipProgramApiClient;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ApiResponse<MentorshipProgram> createMentorshipProgram(
@@ -28,7 +28,7 @@ public class MentorshipProgramController {
 			return new ApiResponse<>(bindingResult.getAllErrors());
 		}
 
-		MentorshipProgram mentorshipProgram = mentorshipProgramApiService.createMentorshipProgram(mentorshipProgramDto);
+		MentorshipProgram mentorshipProgram = mentorshipProgramApiClient.createMentorshipProgram(mentorshipProgramDto);
 		mentorshipProgram.getParticipants().size();
 		return new ApiResponse<>(mentorshipProgram);
 	}
@@ -40,11 +40,11 @@ public class MentorshipProgramController {
 			return new ApiResponse<>(bindingResult.getAllErrors());
 		}
 
-		return new ApiResponse<>(mentorshipProgramApiService.updateMentorshipProgram(id, mentorshipProgramDto));
+		return new ApiResponse<>(mentorshipProgramApiClient.updateMentorshipProgram(id, mentorshipProgramDto));
 	}
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
 	public ApiResponse<MentorshipProgram> findById(@PathVariable Long id) {
-		return new ApiResponse<>(mentorshipProgramApiService.findById(id));
+		return new ApiResponse<>(mentorshipProgramApiClient.findById(id));
 	}
 }

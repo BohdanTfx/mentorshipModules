@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.epam.mentorship.api.facade.UserApiService;
+import com.epam.mentorship.api.client.UserApiClient;
 import com.epam.mentorship.api.model.dto.ApiResponse;
 import com.epam.mentorship.api.model.dto.UserDto;
 import com.epam.mentorship.model.User;
@@ -22,7 +22,7 @@ import com.epam.mentorship.model.User;
 @RequestMapping(path = "/api/users")
 public class UserController {
 	@Autowired
-	private UserApiService userService;
+	private UserApiClient userApiClient;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ApiResponse<User> createUser(@RequestBody @Valid UserDto userDto, BindingResult bindingResult) {
@@ -30,7 +30,7 @@ public class UserController {
 			return new ApiResponse<>(bindingResult.getAllErrors());
 		}
 
-		User user = userService.createUser(userDto);
+		User user = userApiClient.createUser(userDto);
 		return new ApiResponse<>(user);
 	}
 
@@ -41,17 +41,17 @@ public class UserController {
 			return new ApiResponse<>(bindingResult.getAllErrors());
 		}
 
-		User user = userService.updateUser(id, userDto);
+		User user = userApiClient.updateUser(id, userDto);
 		return new ApiResponse<>(user);
 	}
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
 	public ApiResponse<User> findById(@PathVariable Long id) {
-		return new ApiResponse<>(userService.findById(id));
+		return new ApiResponse<>(userApiClient.findById(id));
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ApiResponse<List<User>> findUsers(Model model) {
-		return new ApiResponse<>(userService.findUsers());
+		return new ApiResponse<>(userApiClient.findUsers());
 	}
 }

@@ -1,4 +1,4 @@
-package com.epam.mentorship.api.facade;
+package com.epam.mentorship.api.client;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.epam.mentorship.api.facade.annotation.ApiFacade;
+import com.epam.mentorship.api.client.annotation.ApiClient;
 import com.epam.mentorship.api.model.dto.MenteeStateDto;
 import com.epam.mentorship.enums.Location;
 import com.epam.mentorship.model.Mentee;
@@ -17,8 +17,8 @@ import com.epam.mentorship.service.MentorService;
 import com.epam.mentorship.service.MentorshipProgramService;
 import com.epam.mentorship.service.UserService;
 
-@ApiFacade
-public class ParticipantApiService {
+@ApiClient
+public class ParticipantApiClient {
 	@Autowired
 	private MentorService mentorService;
 	@Autowired

@@ -16,7 +16,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.epam</groupId>
-			<artifactId>mentorship2-api</artifactId>
+			<artifactId>mentorship2-api-client</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -31,19 +31,10 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-oxm</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
 		</dependency>
 
 		<dependency>

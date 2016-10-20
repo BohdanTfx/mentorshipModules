@@ -1,18 +1,18 @@
-package com.epam.mentorship.api.facade;
+package com.epam.mentorship.api.client;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.epam.mentorship.api.facade.annotation.ApiFacade;
+import com.epam.mentorship.api.client.annotation.ApiClient;
 import com.epam.mentorship.api.model.dto.MentorshipProgramDto;
 import com.epam.mentorship.api.util.DtoEntityConverter;
 import com.epam.mentorship.model.MentorshipProgram;
 import com.epam.mentorship.service.MentorshipProgramService;
 import com.epam.mentorship.service.UserService;
 
-@ApiFacade
-public class MentorshipProgramApiService {
+@ApiClient
+public class MentorshipProgramApiClient {
 	@Autowired
 	private MentorshipProgramService mentorshipProgramService;
 	@Autowired

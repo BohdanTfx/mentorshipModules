@@ -1,4 +1,4 @@
-package com.epam.mentorship.api.facade.annotation;
+package com.epam.mentorship.api.client.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Component
-public @interface ApiFacade {
+public @interface ApiClient {
 
 }
