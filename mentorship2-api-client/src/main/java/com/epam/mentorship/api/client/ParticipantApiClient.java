@@ -107,7 +107,7 @@ public class ParticipantApiClient {
 	public Double getMenteesFinishStatistic(Date startDate, Date endDate, Boolean successfullyFinished) {
 		startDate = startDate == null ? new GregorianCalendar(1990, 1, 1).getTime() : startDate;
 		endDate = endDate == null ? new Date() : endDate;
-		successfullyFinished = successfullyFinished == null ? true : successfullyFinished;
+		successfullyFinished = successfullyFinished == null ? true : false;
 
 		return menteeService.getFinishStatistic(startDate, endDate, successfullyFinished);
 	}
