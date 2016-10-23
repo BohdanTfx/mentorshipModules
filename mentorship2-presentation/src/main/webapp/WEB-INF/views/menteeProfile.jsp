@@ -9,8 +9,8 @@
 </head>
 <body>
 	<h2>Mentee №${mentee.id}</h2>
-	<blockquote>Mentor: ${mentee.mentor.firstName}
-		${mentee.mentor.lastName} (${mentee.mentor.jobTitle})</blockquote>
+	<blockquote>Mentor: ${mentee.mentor.user.firstName}
+		${mentee.mentor.user.lastName} (${mentee.mentor.user.jobTitle})</blockquote>
 	<div>
 		First name: <b>${mentee.user.firstName}</b>
 	</div>
@@ -26,7 +26,7 @@
 	<div>Active: ${mentee.active eq true ? 'Yes' : 'No'}</div>
 	<c:if test="${mentee.started eq true}">
 		<div>
-			Start info: <b>${mentee.startDate}</b>
+			Start info: <b>${mentee.startedDate}</b>
 		</div>
 	</c:if>
 	<c:if test="${mentee.finished eq true}">

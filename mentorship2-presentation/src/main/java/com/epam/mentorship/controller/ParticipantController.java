@@ -42,7 +42,7 @@ public class ParticipantController {
 		return "mentorProfile";
 	}
 
-	@RequestMapping(path = "/mentor/{mentorId}/mentees/{menteeId}", method = RequestMethod.DELETE)
+	@RequestMapping(path = "/mentor/{mentorId}/mentees/{menteeId}", method = RequestMethod.GET)
 	public String removeMentees(@PathVariable Long mentorId, @PathVariable Long menteeId, Model model) {
 		model.addAttribute("mentor", participantApiClient.removeMentees(mentorId, menteeId));
 		return "mentorProfile";
@@ -67,13 +67,13 @@ public class ParticipantController {
 		return "menteeProfile";
 	}
 
-	@RequestMapping(path = "mentee/{menteeId}", method = RequestMethod.PUT)
+	@RequestMapping(path = "mentee/{menteeId}", method = RequestMethod.POST)
 	public String assignMentor(@PathVariable Long menteeId, @RequestParam Long mentorId, Model model) {
 		model.addAttribute("mentee", participantApiClient.assignMentor(menteeId, mentorId));
 		return "menteeProfile";
 	}
 
-	@RequestMapping(path = "mentee/{menteeId}/state", method = RequestMethod.PUT)
+	@RequestMapping(path = "mentee/{menteeId}/state", method = RequestMethod.POST)
 	public String changeMenteeState(@PathVariable Long menteeId, @RequestBody MenteeStateDto menteeStateDto,
 			Model model) {
 		model.addAttribute("mentee", participantApiClient.changeMenteeState(menteeId, menteeStateDto));

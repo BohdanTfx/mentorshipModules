@@ -16,7 +16,7 @@ import com.epam.mentorship.api.model.dto.MentorshipProgramDto;
 import com.epam.mentorship.model.MentorshipProgram;
 
 @Controller
-@RequestMapping(path = "/mentorship")
+@RequestMapping(path = "/api/mentorship")
 public class MentorshipProgramController {
 	@Autowired
 	private MentorshipProgramApiClient mentorshipProgramApiClient;

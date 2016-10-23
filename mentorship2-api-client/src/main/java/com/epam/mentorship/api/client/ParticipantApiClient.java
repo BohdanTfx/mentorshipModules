@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.epam.mentorship.api.client.annotation.ApiClient;
 import com.epam.mentorship.api.model.dto.MenteeStateDto;
@@ -35,23 +36,35 @@ public class ParticipantApiClient {
 		return mentorService.create(mentor);
 	}
 
+	@Transactional
 	public Mentor addMentees(Long id, List<Long> menteesId) {
 		Mentor mentor = mentorService.findById(id);
+		List<Mentee> mentees = menteeService.getMenteesFromIds(menteesId);
+		setMentor(mentor, mentees);
 		if (mentor.getMentees() != null) {
-			mentor.getMentees().addAll(menteeService.getMenteesFromIds(menteesId));
+			mentor.getMentees().addAll(mentees);
 		} else {
-			mentor.setMentees(menteeService.getMenteesFromIds(menteesId));
+			mentor.setMentees(mentees);
 		}
 		return mentorService.update(mentor);
 	}
 
+	private void setMentor(Mentor mentor, List<Mentee> mentees) {
+		for (Mentee mentee : mentees) {
+			mentee.setMentor(mentor);
+		}
+	}
+
+	@Transactional
 	public Mentor removeMentees(Long mentorId, Long menteeId) {
 		Mentor mentor = mentorService.findById(mentorId);
 		List<Mentee> mentees = mentor.getMentees();
 		for (Iterator<Mentee> iterator = mentees.iterator(); iterator.hasNext();) {
 			Mentee mentee = (Mentee) iterator.next();
 			if (Long.compare(mentee.getId(), menteeId) == 0) {
-				iterator.remove();
+				iterator.remove(); 
+				mentee.setMentor(null);
+				menteeService.update(mentee);
 			}
 		}
 
@@ -66,6 +79,7 @@ public class ParticipantApiClient {
 		return menteeService.create(mentee);
 	}
 
+	@Transactional
 	public Mentee assignMentor(Long menteeId, Long mentorId) {
 		Mentee mentee = menteeService.findById(menteeId);
 		mentee.setMentor(mentorService.findById(mentorId));

@@ -8,5 +8,7 @@
 </head>
 <body>
 	<h1>Error ;(</h1>
+	<div>${error.getClass().getSimpleName()}</div>
+	<div>${error.message}</div>
 </body>
 </html>

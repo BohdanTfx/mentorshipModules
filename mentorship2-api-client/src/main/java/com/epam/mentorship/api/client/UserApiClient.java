@@ -18,10 +18,11 @@ public class UserApiClient {
 	private DtoEntityConverter dtoEntityConverter;
 
 	public User createUser(UserDto userDto) {
-		User entity = dtoEntityConverter.convert(userDto);
-		entity.setCreatedByUser(entity);
-		entity.setLastModifiedByUser(entity);
-		return userService.save(entity);
+		throw new RuntimeException("Some msg");
+//		User entity = dtoEntityConverter.convert(userDto);
+//		entity.setCreatedByUser(entity);
+//		entity.setLastModifiedByUser(entity);
+//		return userService.save(entity);
 	}
 
 	public User updateUser(Long id, UserDto userDto) {

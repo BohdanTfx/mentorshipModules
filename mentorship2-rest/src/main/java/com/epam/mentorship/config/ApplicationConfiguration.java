@@ -7,9 +7,9 @@ import java.util.Map;
 
 import javax.xml.bind.Marshaller;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.http.MediaType;
@@ -30,22 +30,25 @@ import com.epam.mentorship.model.Mentor;
 import com.epam.mentorship.model.MentorshipProgram;
 import com.epam.mentorship.model.User;
 
-@Configuration
 @ImportResource("classpath:persistance-config.xml")
 @ComponentScan("com.epam.mentorship")
 @EnableWebMvc
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
+	private static final Logger LOG = Logger.getLogger(ApplicationConfiguration.class);
 
 	@Override
 	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+		LOG.info("content negotiation configuration");
 		configurer.favorPathExtension(true).ignoreAcceptHeader(true).defaultContentType(MediaType.APPLICATION_JSON)
 				.useJaf(false).mediaType("xml", MediaType.APPLICATION_XML);
 	}
 
 	@Bean
 	public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
+		LOG.info("content negotiation view resolvers configuration");
+		
 		ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
 		resolver.setContentNegotiationManager(manager);
 

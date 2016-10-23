@@ -23,6 +23,7 @@
 	</div>
 	<h3>Mentees</h3>
 	<c:forEach items="${mentor.mentees}" var="mentee">
+		<h4>${mentee.id}</h4>
 		<div>
 			First name: <b>${mentee.user.firstName}</b>
 		</div>

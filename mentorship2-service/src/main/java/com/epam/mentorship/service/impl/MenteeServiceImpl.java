@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.epam.mentorship.dao.MenteeDao;
 import com.epam.mentorship.enums.Location;
@@ -65,7 +64,6 @@ public class MenteeServiceImpl implements MenteeService {
 	}
 
 	@Override
-	@Transactional
 	public List<Mentee> getMenteesFromIds(List<Long> menteesIds) {
 		List<Mentee> mentees = new ArrayList<>();
 		for (Long id : menteesIds) {
