@@ -44,11 +44,11 @@ public class Mentee extends Participant {
     private int mentorshipDuration;
 
     public Date getEndDate() {
-        return endDate;
+        return endDate == null ? null : new Date(endDate.getTime());
     }
 
     public void setEndDate(final Date endDate) {
-        this.endDate = endDate;
+        this.endDate = new Date(endDate.getTime());
     }
 
     public boolean isStarted() {
@@ -76,11 +76,11 @@ public class Mentee extends Participant {
     }
 
     public Date getStartedDate() {
-        return startedDate;
+        return startedDate == null ? null : new Date(startedDate.getTime());
     }
 
     public void setStartedDate(final Date startedDate) {
-        this.startedDate = startedDate;
+        this.startedDate = new Date(startedDate.getTime());
     }
 
     public int getMentorshipDuration() {

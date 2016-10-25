@@ -19,7 +19,7 @@ public class GenericJpaDao<T extends BaseEntity<ID>, ID extends Serializable>
     private static final long serialVersionUID = 1L;
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private transient EntityManager entityManager;
 
     private Class<T> persistanceClass;
 

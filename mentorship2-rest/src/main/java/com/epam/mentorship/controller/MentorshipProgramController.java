@@ -33,7 +33,6 @@ public class MentorshipProgramController {
 
         MentorshipProgram mentorshipProgram = mentorshipProgramApiClient
                 .createMentorshipProgram(mentorshipProgramDto);
-        mentorshipProgram.getParticipants().size();
         return new ApiResponse<>(mentorshipProgram);
     }
 

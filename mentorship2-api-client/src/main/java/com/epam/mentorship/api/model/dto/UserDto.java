@@ -50,10 +50,10 @@ public class UserDto {
     }
 
     public Date getDateOfBirth() {
-        return dateOfBirth;
+        return dateOfBirth == null ? null : new Date(dateOfBirth.getTime());
     }
 
     public void setDateOfBirth(final Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = new Date(dateOfBirth.getTime());
     }
 }

@@ -52,19 +52,19 @@ public class MentorshipProgram extends BaseEntity<Long> {
     private boolean finished;
 
     public Date getStartDate() {
-        return startDate;
+        return startDate == null ? null : new Date(startDate.getTime());
     }
 
     public void setStartDate(final Date startDate) {
-        this.startDate = startDate;
+        this.startDate = new Date(startDate.getTime());
     }
 
     public Date getEndDate() {
-        return endDate;
+        return endDate == null ? null : new Date(endDate.getTime());
     }
 
     public void setEndDate(final Date endDate) {
-        this.endDate = endDate;
+        this.endDate = new Date(endDate.getTime());
     }
 
     public boolean isStarted() {

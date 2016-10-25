@@ -62,19 +62,19 @@ public class User extends BaseEntity<Long> {
     private User createdByUser;
 
     public Date getCreated() {
-        return created;
+        return created == null ? null : new Date(created.getTime());
     }
 
     public void setCreated(final Date created) {
-        this.created = created;
+        this.created = new Date(created.getTime());
     }
 
     public Date getLastModified() {
-        return lastModified;
+        return lastModified == null ? null : new Date(lastModified.getTime());
     }
 
     public void setLastModified(final Date lastModified) {
-        this.lastModified = lastModified;
+        this.lastModified = new Date(lastModified.getTime());
     }
 
     public User getLastModifiedByUser() {
@@ -118,11 +118,11 @@ public class User extends BaseEntity<Long> {
     }
 
     public Date getDateOfBirth() {
-        return dateOfBirth;
+        return dateOfBirth == null ? null : new Date(dateOfBirth.getTime());
     }
 
     public void setDateOfBirth(final Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+        this.dateOfBirth = new Date(dateOfBirth.getTime());
     }
 
     @BeforeUpdate

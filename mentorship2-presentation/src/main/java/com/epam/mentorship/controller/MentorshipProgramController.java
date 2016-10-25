@@ -34,7 +34,6 @@ public class MentorshipProgramController {
 
         MentorshipProgram mentorshipProgram = mentorshipProgramApiClient
                 .createMentorshipProgram(mentorshipProgramDto);
-        mentorshipProgram.getParticipants().size();
         model.addAttribute("mentorshipProgram", mentorshipProgram);
         return "mentorshipProgram";
     }
