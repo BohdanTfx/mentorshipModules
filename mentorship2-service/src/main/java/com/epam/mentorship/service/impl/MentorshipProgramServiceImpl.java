@@ -15,37 +15,43 @@ import com.epam.mentorship.service.MentorshipProgramService;
 
 @Service
 public class MentorshipProgramServiceImpl implements MentorshipProgramService {
-	@Autowired
-	private MentorshipProgramDao mentorshipProgramDao;
+    @Autowired
+    private MentorshipProgramDao mentorshipProgramDao;
 
-	public MentorshipProgram save(MentorshipProgram entity) {
-		return mentorshipProgramDao.save(entity);
-	}
+    @Override
+    public MentorshipProgram save(final MentorshipProgram entity) {
+        return mentorshipProgramDao.save(entity);
+    }
 
-	public MentorshipProgram update(MentorshipProgram entity) {
-		return mentorshipProgramDao.update(entity);
-	}
+    @Override
+    public MentorshipProgram update(final MentorshipProgram entity) {
+        return mentorshipProgramDao.update(entity);
+    }
 
-	public void delete(MentorshipProgram mentorshipProgram) {
-		mentorshipProgramDao.delete(mentorshipProgram);
-	}
+    @Override
+    public void delete(final MentorshipProgram mentorshipProgram) {
+        mentorshipProgramDao.delete(mentorshipProgram);
+    }
 
-	public void delete(Long id) {
-		mentorshipProgramDao.delete(mentorshipProgramDao.getById(id));
-	}
+    @Override
+    public void delete(final Long id) {
+        mentorshipProgramDao.delete(mentorshipProgramDao.getById(id));
+    }
 
-	@Transactional
-	public MentorshipProgram findById(Long id) {
-		MentorshipProgram mentorshipProgram = mentorshipProgramDao.getById(id);
-		for (Participant participant : mentorshipProgram.getParticipants()) {
-			if (participant instanceof Mentor) {
-				Hibernate.initialize(((Mentor) participant).getMentees());
-			}
-		}
-		return mentorshipProgram;
-	}
+    @Override
+    @Transactional
+    public MentorshipProgram findById(final Long id) {
+        MentorshipProgram mentorshipProgram = mentorshipProgramDao.getById(id);
+        for (Participant participant : mentorshipProgram.getParticipants()) {
+            if (participant instanceof Mentor) {
+                Hibernate.initialize(((Mentor) participant).getMentees());
+            }
+        }
+        return mentorshipProgram;
+    }
 
-	public List<MentorshipProgram> findMentorshipPrograms() {
-		return mentorshipProgramDao.getAll();
-	}
+    @Override
+    public List<MentorshipProgram> findMentorshipPrograms() {
+        return mentorshipProgramDao.getAll();
+    }
 }

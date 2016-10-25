@@ -16,35 +16,45 @@ import com.epam.mentorship.api.model.dto.MentorshipProgramDto;
 import com.epam.mentorship.model.MentorshipProgram;
 
 @Controller
-@RequestMapping(path = "/api/mentorship")
+@RequestMapping(
+        path = "/api/mentorship")
 public class MentorshipProgramController {
-	@Autowired
-	private MentorshipProgramApiClient mentorshipProgramApiClient;
+    @Autowired
+    private MentorshipProgramApiClient mentorshipProgramApiClient;
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ApiResponse<MentorshipProgram> createMentorshipProgram(
-			@RequestBody @Valid MentorshipProgramDto mentorshipProgramDto, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			return new ApiResponse<>(bindingResult.getAllErrors());
-		}
+    @RequestMapping(
+            method = RequestMethod.POST)
+    public ApiResponse<MentorshipProgram> createMentorshipProgram(
+            @RequestBody @Valid final MentorshipProgramDto mentorshipProgramDto,
+            final BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ApiResponse<>(bindingResult.getAllErrors());
+        }
 
-		MentorshipProgram mentorshipProgram = mentorshipProgramApiClient.createMentorshipProgram(mentorshipProgramDto);
-		mentorshipProgram.getParticipants().size();
-		return new ApiResponse<>(mentorshipProgram);
-	}
+        MentorshipProgram mentorshipProgram = mentorshipProgramApiClient
+                .createMentorshipProgram(mentorshipProgramDto);
+        mentorshipProgram.getParticipants().size();
+        return new ApiResponse<>(mentorshipProgram);
+    }
 
-	@RequestMapping(path = "/{id}", method = RequestMethod.POST)
-	public ApiResponse<MentorshipProgram> updateMentorshipProgram(@PathVariable Long id,
-			@RequestBody @Valid MentorshipProgramDto mentorshipProgramDto, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			return new ApiResponse<>(bindingResult.getAllErrors());
-		}
+    @RequestMapping(
+            path = "/{id}", method = RequestMethod.POST)
+    public ApiResponse<MentorshipProgram> updateMentorshipProgram(
+            @PathVariable final Long id,
+            @RequestBody @Valid final MentorshipProgramDto mentorshipProgramDto,
+            final BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ApiResponse<>(bindingResult.getAllErrors());
+        }
 
-		return new ApiResponse<>(mentorshipProgramApiClient.updateMentorshipProgram(id, mentorshipProgramDto));
-	}
+        return new ApiResponse<>(mentorshipProgramApiClient
+                .updateMentorshipProgram(id, mentorshipProgramDto));
+    }
 
-	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
-	public ApiResponse<MentorshipProgram> findById(@PathVariable Long id) {
-		return new ApiResponse<>(mentorshipProgramApiClient.findById(id));
-	}
+    @RequestMapping(
+            path = "/{id}", method = RequestMethod.GET)
+    public ApiResponse<MentorshipProgram> findById(
+            @PathVariable final Long id) {
+        return new ApiResponse<>(mentorshipProgramApiClient.findById(id));
+    }
 }

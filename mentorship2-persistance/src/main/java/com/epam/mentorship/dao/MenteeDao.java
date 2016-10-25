@@ -7,9 +7,11 @@ import com.epam.mentorship.enums.Location;
 import com.epam.mentorship.model.Mentee;
 
 public interface MenteeDao extends GenericDao<Mentee, Long> {
-	List<Mentee> getMenteesWithoutMentorByLocation(Location location);
+    List<Mentee> getMenteesWithoutMentorByLocation(Location location);
 
-	List<Mentee> filterMentees(boolean descendingOrder, int startPosition, int itemsNumber);
+    List<Mentee> filterMentees(boolean descendingOrder, int startPosition,
+            int itemsNumber);
 
-	Double getFinishStatistic(Date startDate, Date endDate, boolean successfullyFinished);
+    Double getFinishStatistic(Date startDate, Date endDate,
+            boolean successfullyFinished);
 }

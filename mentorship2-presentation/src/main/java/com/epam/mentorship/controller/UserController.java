@@ -16,45 +16,52 @@ import com.epam.mentorship.api.model.dto.UserDto;
 import com.epam.mentorship.model.User;
 
 @Controller
-@RequestMapping(path = "/users")
+@RequestMapping(
+        path = "/users")
 public class UserController {
-	@Autowired
-	private UserApiClient userApiClient;
+    @Autowired
+    private UserApiClient userApiClient;
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String createUser(@RequestBody @Valid UserDto userDto, BindingResult bindingResult, Model model) {
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("errors", bindingResult.getAllErrors());
-			return "userProfile";
-		}
+    @RequestMapping(
+            method = RequestMethod.POST)
+    public String createUser(@RequestBody @Valid final UserDto userDto,
+            final BindingResult bindingResult, final Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "userProfile";
+        }
 
-		User user = userApiClient.createUser(userDto);
-		model.addAttribute("user", user);
-		return "userProfile";
-	}
+        User user = userApiClient.createUser(userDto);
+        model.addAttribute("user", user);
+        return "userProfile";
+    }
 
-	@RequestMapping(path = "/{id}", method = RequestMethod.POST)
-	public String updateUser(@PathVariable Long id, @RequestBody @Valid UserDto userDto, BindingResult bindingResult,
-			Model model) {
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("errors", bindingResult.getAllErrors());
-			return "userProfile";
-		}
+    @RequestMapping(
+            path = "/{id}", method = RequestMethod.POST)
+    public String updateUser(@PathVariable final Long id,
+            @RequestBody @Valid final UserDto userDto,
+            final BindingResult bindingResult, final Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "userProfile";
+        }
 
-		User user = userApiClient.updateUser(id, userDto);
-		model.addAttribute("user", user);
-		return "userProfile";
-	}
+        User user = userApiClient.updateUser(id, userDto);
+        model.addAttribute("user", user);
+        return "userProfile";
+    }
 
-	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
-	public String findById(@PathVariable Long id, Model model) {
-		model.addAttribute("user", userApiClient.findById(id));
-		return "userProfile";
-	}
+    @RequestMapping(
+            path = "/{id}", method = RequestMethod.GET)
+    public String findById(@PathVariable final Long id, final Model model) {
+        model.addAttribute("user", userApiClient.findById(id));
+        return "userProfile";
+    }
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String findUsers(Model model) {
-		model.addAttribute("users", userApiClient.findUsers());
-		return "users";
-	}
+    @RequestMapping(
+            method = RequestMethod.GET)
+    public String findUsers(final Model model) {
+        model.addAttribute("users", userApiClient.findUsers());
+        return "users";
+    }
 }

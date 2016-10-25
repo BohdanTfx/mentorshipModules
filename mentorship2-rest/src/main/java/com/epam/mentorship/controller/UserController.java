@@ -19,39 +19,47 @@ import com.epam.mentorship.api.model.dto.UserDto;
 import com.epam.mentorship.model.User;
 
 @RestController
-@RequestMapping(path = "/api/users")
+@RequestMapping(
+        path = "/api/users")
 public class UserController {
-	@Autowired
-	private UserApiClient userApiClient;
+    @Autowired
+    private UserApiClient userApiClient;
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ApiResponse<User> createUser(@RequestBody @Valid UserDto userDto, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			return new ApiResponse<>(bindingResult.getAllErrors());
-		}
+    @RequestMapping(
+            method = RequestMethod.POST)
+    public ApiResponse<User> createUser(
+            @RequestBody @Valid final UserDto userDto,
+            final BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ApiResponse<>(bindingResult.getAllErrors());
+        }
 
-		User user = userApiClient.createUser(userDto);
-		return new ApiResponse<>(user);
-	}
+        User user = userApiClient.createUser(userDto);
+        return new ApiResponse<>(user);
+    }
 
-	@RequestMapping(path = "/{id}", method = RequestMethod.POST)
-	public ApiResponse<User> updateUser(@PathVariable Long id, @RequestBody @Valid UserDto userDto,
-			BindingResult bindingResult, Model model) {
-		if (bindingResult.hasErrors()) {
-			return new ApiResponse<>(bindingResult.getAllErrors());
-		}
+    @RequestMapping(
+            path = "/{id}", method = RequestMethod.POST)
+    public ApiResponse<User> updateUser(@PathVariable final Long id,
+            @RequestBody @Valid final UserDto userDto,
+            final BindingResult bindingResult, final Model model) {
+        if (bindingResult.hasErrors()) {
+            return new ApiResponse<>(bindingResult.getAllErrors());
+        }
 
-		User user = userApiClient.updateUser(id, userDto);
-		return new ApiResponse<>(user);
-	}
+        User user = userApiClient.updateUser(id, userDto);
+        return new ApiResponse<>(user);
+    }
 
-	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
-	public ApiResponse<User> findById(@PathVariable Long id) {
-		return new ApiResponse<>(userApiClient.findById(id));
-	}
+    @RequestMapping(
+            path = "/{id}", method = RequestMethod.GET)
+    public ApiResponse<User> findById(@PathVariable final Long id) {
+        return new ApiResponse<>(userApiClient.findById(id));
+    }
 
-	@RequestMapping(method = RequestMethod.GET)
-	public ApiResponse<List<User>> findUsers(Model model) {
-		return new ApiResponse<>(userApiClient.findUsers());
-	}
+    @RequestMapping(
+            method = RequestMethod.GET)
+    public ApiResponse<List<User>> findUsers(final Model model) {
+        return new ApiResponse<>(userApiClient.findUsers());
+    }
 }

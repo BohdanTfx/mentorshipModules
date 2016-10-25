@@ -36,33 +36,39 @@ import com.epam.mentorship.model.User;
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
-	private static final Logger LOG = Logger.getLogger(ApplicationConfiguration.class);
+    private static final Logger LOG = Logger
+            .getLogger(ApplicationConfiguration.class);
 
-	@Override
-	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-		LOG.info("content negotiation configuration");
-		configurer.favorPathExtension(true).ignoreAcceptHeader(true).defaultContentType(MediaType.APPLICATION_JSON)
-				.useJaf(false).mediaType("xml", MediaType.APPLICATION_XML);
-	}
+    @Override
+    public void configureContentNegotiation(
+            final ContentNegotiationConfigurer configurer) {
+        LOG.info("content negotiation configuration");
+        configurer.favorPathExtension(true).ignoreAcceptHeader(true)
+                .defaultContentType(MediaType.APPLICATION_JSON).useJaf(false)
+                .mediaType("xml", MediaType.APPLICATION_XML);
+    }
 
-	@Bean
-	public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
-		LOG.info("content negotiation view resolvers configuration");
-		
-		ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
-		resolver.setContentNegotiationManager(manager);
+    @Bean
+    public ViewResolver contentNegotiatingViewResolver(
+            final ContentNegotiationManager manager) {
+        LOG.info("content negotiation view resolvers configuration");
 
-		List<View> defaultViews = new ArrayList<>();
-		defaultViews.add(new MappingJackson2JsonView());
+        ContentNegotiatingViewResolver resolver
+            = new ContentNegotiatingViewResolver();
+        resolver.setContentNegotiationManager(manager);
 
-		Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-		Map<String, Object> marshallerProperties = new HashMap<>();
-		marshallerProperties.put(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		jaxb2Marshaller.setMarshallerProperties(marshallerProperties);
-		jaxb2Marshaller.setClassesToBeBound(User.class, MentorshipProgram.class, Mentor.class, Mentee.class);
-		defaultViews.add(new MarshallingView(jaxb2Marshaller));
+        List<View> defaultViews = new ArrayList<>();
+        defaultViews.add(new MappingJackson2JsonView());
 
-		resolver.setDefaultViews(defaultViews);
-		return resolver;
-	}
+        Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
+        Map<String, Object> marshallerProperties = new HashMap<>();
+        marshallerProperties.put(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        jaxb2Marshaller.setMarshallerProperties(marshallerProperties);
+        jaxb2Marshaller.setClassesToBeBound(User.class, MentorshipProgram.class,
+                Mentor.class, Mentee.class);
+        defaultViews.add(new MarshallingView(jaxb2Marshaller));
+
+        resolver.setDefaultViews(defaultViews);
+        return resolver;
+    }
 }

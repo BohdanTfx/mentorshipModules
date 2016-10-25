@@ -5,35 +5,35 @@ import java.util.List;
 import org.springframework.validation.ObjectError;
 
 public class ApiResponse<T> {
-	private T body;
-	private List<ObjectError> errors;
+    private T body;
+    private List<ObjectError> errors;
 
-	public ApiResponse(List<ObjectError> errors) {
-		this.errors = errors;
-	}
-	
-	public ApiResponse(T body) {
-		this.body = body;
-	}
-	
-	public ApiResponse(T body, List<ObjectError> errors) {
-		this.body = body;
-		this.errors = errors;
-	}
+    public ApiResponse(final List<ObjectError> errors) {
+        this.errors = errors;
+    }
 
-	public List<ObjectError> getErrors() {
-		return errors;
-	}
+    public ApiResponse(final T body) {
+        this.body = body;
+    }
 
-	public void setErrors(List<ObjectError> errors) {
-		this.errors = errors;
-	}
+    public ApiResponse(final T body, final List<ObjectError> errors) {
+        this.body = body;
+        this.errors = errors;
+    }
 
-	public T getBody() {
-		return body;
-	}
+    public List<ObjectError> getErrors() {
+        return errors;
+    }
 
-	public void setBody(T body) {
-		this.body = body;
-	}
+    public void setErrors(final List<ObjectError> errors) {
+        this.errors = errors;
+    }
+
+    public T getBody() {
+        return body;
+    }
+
+    public void setBody(final T body) {
+        this.body = body;
+    }
 }

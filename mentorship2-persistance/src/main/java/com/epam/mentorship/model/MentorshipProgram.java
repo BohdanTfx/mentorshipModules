@@ -23,106 +23,109 @@ import com.epam.mentorship.enums.Technology;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
-@Table(name = "mentorship_program")
+@Table(
+        name = "mentorship_program")
 public class MentorshipProgram extends BaseEntity<Long> {
-	private static final long serialVersionUID = 2323549146427836149L;
-	@Column
-	private String title;
-	@OneToOne
-	@JoinColumn(name = "head_id")
-	private User head;
-	@Column
-	@Enumerated(EnumType.STRING)
-	private Technology technology;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "mentorshipProgram")
-	private List<Participant> participants;
-	@Column
-	@Enumerated(EnumType.STRING)
-	private Location location;
-	@Column
-	private Date startDate;
-	@Column
-	private Date endDate;
-	@Column
-	private boolean started;
-	@Column
-	private boolean finished;
+    private static final long serialVersionUID = 2323549146427836149L;
+    @Column
+    private String title;
+    @OneToOne
+    @JoinColumn(
+            name = "head_id")
+    private User head;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Technology technology;
+    @OneToMany(
+            fetch = FetchType.EAGER, mappedBy = "mentorshipProgram")
+    private List<Participant> participants;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Location location;
+    @Column
+    private Date startDate;
+    @Column
+    private Date endDate;
+    @Column
+    private boolean started;
+    @Column
+    private boolean finished;
 
-	public Date getStartDate() {
-		return startDate;
-	}
+    public Date getStartDate() {
+        return startDate;
+    }
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+    public void setStartDate(final Date startDate) {
+        this.startDate = startDate;
+    }
 
-	public Date getEndDate() {
-		return endDate;
-	}
+    public Date getEndDate() {
+        return endDate;
+    }
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+    public void setEndDate(final Date endDate) {
+        this.endDate = endDate;
+    }
 
-	public boolean isStarted() {
-		return started;
-	}
+    public boolean isStarted() {
+        return started;
+    }
 
-	public void setStarted(boolean started) {
-		this.started = started;
-	}
+    public void setStarted(final boolean started) {
+        this.started = started;
+    }
 
-	public boolean isFinished() {
-		return finished;
-	}
+    public boolean isFinished() {
+        return finished;
+    }
 
-	public void setFinished(boolean finished) {
-		this.finished = finished;
-	}
+    public void setFinished(final boolean finished) {
+        this.finished = finished;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(final String title) {
+        this.title = title;
+    }
 
-	public List<Participant> getParticipants() {
-		return participants;
-	}
+    public List<Participant> getParticipants() {
+        return participants;
+    }
 
-	public void setParticipants(List<Participant> participants) {
-		this.participants = participants;
-	}
+    public void setParticipants(final List<Participant> participants) {
+        this.participants = participants;
+    }
 
-	public User getHead() {
-		return head;
-	}
+    public User getHead() {
+        return head;
+    }
 
-	public void setHead(User head) {
-		this.head = head;
-	}
+    public void setHead(final User head) {
+        this.head = head;
+    }
 
-	public Technology getTechnology() {
-		return technology;
-	}
+    public Technology getTechnology() {
+        return technology;
+    }
 
-	public void setTechnology(Technology technology) {
-		this.technology = technology;
-	}
+    public void setTechnology(final Technology technology) {
+        this.technology = technology;
+    }
 
-	public Location getLocation() {
-		return location;
-	}
+    public Location getLocation() {
+        return location;
+    }
 
-	public void setLocation(Location location) {
-		this.location = location;
-	}
+    public void setLocation(final Location location) {
+        this.location = location;
+    }
 
-	@BeforeSave
-	public void beforeSave() {
-		started = true;
-		startDate = new Date();
-	}
+    @BeforeSave
+    public void beforeSave() {
+        started = true;
+        startDate = new Date();
+    }
 }

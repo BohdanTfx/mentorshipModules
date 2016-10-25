@@ -10,46 +10,50 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.epam.mentorship.enums.JobTitle;
 
 public class UserDto {
-	@NotEmpty
-	@Size(max = 50)
-	private String firstName;
-	@NotEmpty
-	@Size(max = 50)
-	private String lastName;
-	@NotNull
-	private Date dateOfBirth;
-	@NotNull
-	private JobTitle jobTitle;
+    private static final int NAME_LENGTH = 50;
 
-	public String getFirstName() {
-		return firstName;
-	}
+    @NotEmpty
+    @Size(
+            max = NAME_LENGTH)
+    private String firstName;
+    @NotEmpty
+    @Size(
+            max = NAME_LENGTH)
+    private String lastName;
+    @NotNull
+    private Date dateOfBirth;
+    @NotNull
+    private JobTitle jobTitle;
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setFirstName(final String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public JobTitle getJobTitle() {
-		return jobTitle;
-	}
+    public void setLastName(final String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setJobTitle(JobTitle jobTitle) {
-		this.jobTitle = jobTitle;
-	}
+    public JobTitle getJobTitle() {
+        return jobTitle;
+    }
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
+    public void setJobTitle(final JobTitle jobTitle) {
+        this.jobTitle = jobTitle;
+    }
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(final Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 }

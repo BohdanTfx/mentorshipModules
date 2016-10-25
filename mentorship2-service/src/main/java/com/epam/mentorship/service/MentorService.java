@@ -6,17 +6,18 @@ import com.epam.mentorship.model.Mentor;
 
 public interface MentorService {
 
-	Mentor create(Mentor entity);
+    Mentor create(Mentor entity);
 
-	Mentor update(Mentor entity);
+    Mentor update(Mentor entity);
 
-	void delete(Mentor entity);
+    void delete(Mentor entity);
 
-	void delete(Long id);
+    void delete(Long id);
 
-	Mentor findById(Long id);
+    Mentor findById(Long id);
 
-	List<Mentor> findMentors();
+    List<Mentor> findMentors();
 
-	List<Mentor> getMentorsByMenteesAmount(int menteesAmount, boolean onlyActive);
+    List<Mentor> getMentorsByMenteesAmount(int menteesAmount,
+            boolean onlyActive);
 }

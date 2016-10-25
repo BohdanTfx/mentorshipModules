@@ -5,15 +5,15 @@ import java.util.List;
 import com.epam.mentorship.model.MentorshipProgram;
 
 public interface MentorshipProgramService {
-	MentorshipProgram save(MentorshipProgram entity);
+    MentorshipProgram save(MentorshipProgram entity);
 
-	MentorshipProgram update(MentorshipProgram entity);
+    MentorshipProgram update(MentorshipProgram entity);
 
-	void delete(MentorshipProgram mentorshipProgram);
-	
-	void delete(Long id);
+    void delete(MentorshipProgram mentorshipProgram);
 
-	MentorshipProgram findById(Long id);
+    void delete(Long id);
 
-	List<MentorshipProgram> findMentorshipPrograms();
+    MentorshipProgram findById(Long id);
+
+    List<MentorshipProgram> findMentorshipPrograms();
 }

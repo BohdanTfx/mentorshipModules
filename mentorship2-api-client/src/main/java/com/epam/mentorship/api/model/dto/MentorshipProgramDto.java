@@ -10,45 +10,47 @@ import com.epam.mentorship.enums.Location;
 import com.epam.mentorship.enums.Technology;
 
 public class MentorshipProgramDto {
-	@NotEmpty
-	@Size(max = 50)
-	private String title;
-	@Min(0L)
-	private Long headId;
-	@NotNull
-	private Technology technology;
-	@NotNull
-	private Location location;
+    private static final int TITLE_LENGTH = 50;
+    @NotEmpty
+    @Size(
+            max = TITLE_LENGTH)
+    private String title;
+    @Min(0L)
+    private Long headId;
+    @NotNull
+    private Technology technology;
+    @NotNull
+    private Location location;
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(final String title) {
+        this.title = title;
+    }
 
-	public Long getHeadId() {
-		return headId;
-	}
+    public Long getHeadId() {
+        return headId;
+    }
 
-	public void setHeadId(Long headId) {
-		this.headId = headId;
-	}
+    public void setHeadId(final Long headId) {
+        this.headId = headId;
+    }
 
-	public Technology getTechnology() {
-		return technology;
-	}
+    public Technology getTechnology() {
+        return technology;
+    }
 
-	public void setTechnology(Technology technology) {
-		this.technology = technology;
-	}
+    public void setTechnology(final Technology technology) {
+        this.technology = technology;
+    }
 
-	public Location getLocation() {
-		return location;
-	}
+    public Location getLocation() {
+        return location;
+    }
 
-	public void setLocation(Location location) {
-		this.location = location;
-	}
+    public void setLocation(final Location location) {
+        this.location = location;
+    }
 }

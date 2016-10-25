@@ -17,36 +17,41 @@ import com.epam.mentorship.model.BaseEntity;
 @Component
 public class EntityManagerAspect {
 
-	@Before("execution(public * com.epam.mentorship.dao.jpa.GenericJpaDao.save(..)) "
-			+ "|| execution(public * com.epam.mentorship.dao.jpa.GenericJpaDao.update(..))")
-	public void before(JoinPoint joinPoint) {
-		BaseEntity<?> entity = findEntity(joinPoint.getArgs());
-		try {
-			AspectHelper.executeAnnotatedMethod(entity, getActionClass(joinPoint));
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-	}
+    @Before("execution(public * "
+            + "com.epam.mentorship.dao.jpa.GenericJpaDao.save(..)) "
+            + "|| execution(public * "
+            + "com.epam.mentorship.dao.jpa.GenericJpaDao.update(..))")
+    public void before(final JoinPoint joinPoint) {
+        BaseEntity<?> entity = findEntity(joinPoint.getArgs());
+        try {
+            AspectHelper.executeAnnotatedMethod(entity,
+                    getActionClass(joinPoint));
+        } catch (IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
 
-	private Class<? extends Annotation> getActionClass(JoinPoint joinPoint) {
-		Class<? extends Annotation> annotation = null;
-		if ("save".equalsIgnoreCase(AspectHelper.getMethodName(joinPoint))) {
-			annotation = BeforeSave.class;
-		}
-		if ("update".equalsIgnoreCase(AspectHelper.getMethodName(joinPoint))) {
-			annotation = BeforeUpdate.class;
-		}
-		return annotation;
-	}
+    private Class<? extends Annotation> getActionClass(
+            final JoinPoint joinPoint) {
+        Class<? extends Annotation> annotation = null;
+        if ("save".equalsIgnoreCase(AspectHelper.getMethodName(joinPoint))) {
+            annotation = BeforeSave.class;
+        }
+        if ("update".equalsIgnoreCase(AspectHelper.getMethodName(joinPoint))) {
+            annotation = BeforeUpdate.class;
+        }
+        return annotation;
+    }
 
-	private BaseEntity<?> findEntity(Object[] args) {
-		BaseEntity<?> entity = null;
-		for (int i = 0; i < args.length; i++) {
-			if (args[i] instanceof BaseEntity<?>) {
-				entity = (BaseEntity<?>) args[i];
-			}
-		}
-		return entity;
-	}
+    private BaseEntity<?> findEntity(final Object[] args) {
+        BaseEntity<?> entity = null;
+        for (int i = 0; i < args.length; i++) {
+            if (args[i] instanceof BaseEntity<?>) {
+                entity = (BaseEntity<?>) args[i];
+            }
+        }
+        return entity;
+    }
 
 }

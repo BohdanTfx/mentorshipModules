@@ -10,32 +10,38 @@ import com.epam.mentorship.model.User;
 import com.epam.mentorship.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
-	@Autowired
-	private UserDao userDao;
-	
-	public User save(User entity) {
-		return userDao.save(entity);
-	}
+public class UserServiceImpl implements UserService {
+    @Autowired
+    private UserDao userDao;
 
-	public User update(User entity) {
-		return userDao.update(entity);
-	}
+    @Override
+    public User save(final User entity) {
+        return userDao.save(entity);
+    }
 
-	public void delete(User user) {
-		userDao.delete(user);
-	}
-	
-	public void delete(Long id) {
-		userDao.delete(userDao.getById(id));
-	}
+    @Override
+    public User update(final User entity) {
+        return userDao.update(entity);
+    }
 
-	public User findById(Long id) {
-		return userDao.getById(id);
-	}
+    @Override
+    public void delete(final User user) {
+        userDao.delete(user);
+    }
 
-	public List<User> findUsers() {
-		return userDao.getAll();
-	}
+    @Override
+    public void delete(final Long id) {
+        userDao.delete(userDao.getById(id));
+    }
+
+    @Override
+    public User findById(final Long id) {
+        return userDao.getById(id);
+    }
+
+    @Override
+    public List<User> findUsers() {
+        return userDao.getAll();
+    }
 
 }

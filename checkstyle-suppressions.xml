@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+        "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+        "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+    <!-- Suppress (javadoc) JavadocPackage: Missing package-info.java file. -->
+    <suppress checks="JavadocPackage" files=".java"/>
+    <!--Suppress (javadoc) JavadocVariable: Missing a Javadoc comment. -->
+    <suppress checks="JavadocVariable" files=".java"/>
+    <!--Suppress (javadoc) JavadocMethod: Missing a Javadoc comment. -->
+    <suppress checks="JavadocMethod" files=".java"/>
+	<!--Suppress (javadoc) JavadocType: Missing a Javadoc comment. -->
+    <suppress checks="JavadocType" files=".java"/>	
+    <!--Suppress Method 'onStartup' is not designed for extension - needs to be abstract, final or empty. -->
+    <suppress checks="DesignForExtension" files=".java"/>
+	<!--Suppress HideUtilityClassConstructor: Utility classes should not have a public or default constructor -->
+	<suppress checks="HideUtilityClassConstructor" files=".java"/>
+	<!-- File contains tab characters (this is the first instance). [FileTabCharacter] -->	
+	<suppress checks="FileTabCharacter" files=".java"/>
+	<!-- 'lastModified' hides a field. [HiddenField] -->
+	<suppress checks="HiddenField" files=".java"/>
+<!-- 	Avoid inline conditionals. [AvoidInlineConditionals] -->
+	<suppress checks="AvoidInlineConditionals" files=".java"/>
+</suppressions>

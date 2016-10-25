@@ -17,14 +17,16 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
-	private static final Logger LOG = Logger.getLogger(ApplicationConfiguration.class);
+    private static final Logger LOG = Logger
+            .getLogger(ApplicationConfiguration.class);
 
-	@Bean
-	public ViewResolver internalResourceViewResolver() {
-		LOG.info("configuring view resolver");
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/WEB-INF/views/");
-		resolver.setSuffix(".jsp");
-		return resolver;
-	}
+    @Bean
+    public ViewResolver internalResourceViewResolver() {
+        LOG.info("configuring view resolver");
+        InternalResourceViewResolver resolver
+            = new InternalResourceViewResolver();
+        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setSuffix(".jsp");
+        return resolver;
+    }
 }

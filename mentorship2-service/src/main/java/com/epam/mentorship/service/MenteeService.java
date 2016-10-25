@@ -7,23 +7,25 @@ import com.epam.mentorship.enums.Location;
 import com.epam.mentorship.model.Mentee;
 
 public interface MenteeService {
-	Mentee create(Mentee entity);
+    Mentee create(Mentee entity);
 
-	Mentee update(Mentee entity);
+    Mentee update(Mentee entity);
 
-	void delete(Mentee entity);
+    void delete(Mentee entity);
 
-	void delete(Long id);
+    void delete(Long id);
 
-	Mentee findById(Long id);
+    Mentee findById(Long id);
 
-	List<Mentee> findMentees();
+    List<Mentee> findMentees();
 
-	List<Mentee> findMenteesWithoutMentorByLocation(Location location);
+    List<Mentee> findMenteesWithoutMentorByLocation(Location location);
 
-	List<Mentee> filterMentees(boolean descendingOrder, int startPosition, int itemsNumber);
+    List<Mentee> filterMentees(boolean descendingOrder, int startPosition,
+            int itemsNumber);
 
-	Double getFinishStatistic(Date startDate, Date endDate, boolean successfullyFinished);
-	
-	List<Mentee> getMenteesFromIds(List<Long> menteesId);
+    Double getFinishStatistic(Date startDate, Date endDate,
+            boolean successfullyFinished);
+
+    List<Mentee> getMenteesFromIds(List<Long> menteesId);
 }

@@ -16,43 +16,51 @@ import com.epam.mentorship.api.model.dto.MentorshipProgramDto;
 import com.epam.mentorship.model.MentorshipProgram;
 
 @Controller
-@RequestMapping(path = "/mentorship")
+@RequestMapping(
+        path = "/mentorship")
 public class MentorshipProgramController {
-	@Autowired
-	private MentorshipProgramApiClient mentorshipProgramApiClient;
+    @Autowired
+    private MentorshipProgramApiClient mentorshipProgramApiClient;
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String createMentorshipProgram(@RequestBody @Valid MentorshipProgramDto mentorshipProgramDto,
-			BindingResult bindingResult, Model model) {
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("errors", bindingResult.getAllErrors());
-			return "mentorshipProgram";
-		}
+    @RequestMapping(
+            method = RequestMethod.POST)
+    public String createMentorshipProgram(
+            @RequestBody @Valid final MentorshipProgramDto mentorshipProgramDto,
+            final BindingResult bindingResult, final Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "mentorshipProgram";
+        }
 
-		MentorshipProgram mentorshipProgram = mentorshipProgramApiClient.createMentorshipProgram(mentorshipProgramDto);
-		mentorshipProgram.getParticipants().size();
-		model.addAttribute("mentorshipProgram", mentorshipProgram);
-		return "mentorshipProgram";
-	}
+        MentorshipProgram mentorshipProgram = mentorshipProgramApiClient
+                .createMentorshipProgram(mentorshipProgramDto);
+        mentorshipProgram.getParticipants().size();
+        model.addAttribute("mentorshipProgram", mentorshipProgram);
+        return "mentorshipProgram";
+    }
 
-	@RequestMapping(path = "/{id}", method = RequestMethod.POST)
-	public String updateMentorshipProgram(@PathVariable Long id,
-			@RequestBody @Valid MentorshipProgramDto mentorshipProgramDto, BindingResult bindingResult, Model model) {
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("errors", bindingResult.getAllErrors());
-			return "mentorshipProgram";
-		}
+    @RequestMapping(
+            path = "/{id}", method = RequestMethod.POST)
+    public String updateMentorshipProgram(@PathVariable final Long id,
+            @RequestBody @Valid final MentorshipProgramDto mentorshipProgramDto,
+            final BindingResult bindingResult, final Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            return "mentorshipProgram";
+        }
 
-		MentorshipProgram mentorshipProgram = mentorshipProgramApiClient.updateMentorshipProgram(id,
-				mentorshipProgramDto);
-		model.addAttribute("mentorshipProgram", mentorshipProgram);
-		return "mentorshipProgram";
-	}
+        MentorshipProgram mentorshipProgram = mentorshipProgramApiClient
+                .updateMentorshipProgram(id, mentorshipProgramDto);
+        model.addAttribute("mentorshipProgram", mentorshipProgram);
+        return "mentorshipProgram";
+    }
 
-	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
-	public String findById(@PathVariable Long id, Model model) {
-		MentorshipProgram mentorshipProgram = mentorshipProgramApiClient.findById(id);
-		model.addAttribute("mentorshipProgram", mentorshipProgram);
-		return "mentorshipProgram";
-	}
+    @RequestMapping(
+            path = "/{id}", method = RequestMethod.GET)
+    public String findById(@PathVariable final Long id, final Model model) {
+        MentorshipProgram mentorshipProgram = mentorshipProgramApiClient
+                .findById(id);
+        model.addAttribute("mentorshipProgram", mentorshipProgram);
+        return "mentorshipProgram";
+    }
 }

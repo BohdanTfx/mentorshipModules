@@ -6,15 +6,15 @@ import com.epam.mentorship.model.User;
 
 public interface UserService {
 
-	User save(User entity);
+    User save(User entity);
 
-	User update(User entity);
+    User update(User entity);
 
-	void delete(User entity);
+    void delete(User entity);
 
-	void delete(Long id);
+    void delete(Long id);
 
-	User findById(Long id);
+    User findById(Long id);
 
-	List<User> findUsers();
+    List<User> findUsers();
 }
