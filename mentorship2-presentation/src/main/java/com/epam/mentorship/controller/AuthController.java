@@ -19,6 +19,12 @@ public class AuthController {
     private AuthenticationApiClient authClient;
 
     @RequestMapping(
+            path = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
+    }
+
+    @RequestMapping(
             path = "/login", method = RequestMethod.POST)
     public String login(@RequestParam final String username,
             @RequestParam final String password, final HttpSession session,
@@ -30,10 +36,9 @@ public class AuthController {
     }
 
     @RequestMapping(
-            path = "/logout", method = RequestMethod.POST)
-    public String logout(@RequestParam final String username,
-            final HttpSession session, final Model model) {
-        boolean logoutResult = authClient.logout(username, session);
+            path = "/logout", method = RequestMethod.GET)
+    public String logout(final HttpSession session, final Model model) {
+        boolean logoutResult = authClient.logout(session);
         model.addAttribute("logoutResult", logoutResult);
         return "logout";
     }

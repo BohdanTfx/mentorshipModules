@@ -29,10 +29,10 @@ public class AuthenticationApiClient {
         return result;
     }
 
-    public boolean logout(final String username, final HttpSession session) {
+    public boolean logout(final HttpSession session) {
         String user = (String) session.getAttribute("user");
         boolean result = false;
-        if (user != null && user.equals(username)) {
+        if (user != null) {
             session.setAttribute("user", null);
             session.setAttribute("password", null);
             result = true;

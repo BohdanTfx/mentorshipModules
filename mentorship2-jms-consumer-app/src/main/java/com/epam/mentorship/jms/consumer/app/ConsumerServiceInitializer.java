@@ -1,4 +1,4 @@
-package com.epam.mentorship.api.tracker;
+package com.epam.mentorship.jms.consumer.app;
 
 import java.util.Hashtable;
 
@@ -6,19 +6,22 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.jms.JMSException;
 import javax.jms.Session;
-import javax.jms.TextMessage;
 import javax.jms.Topic;
 import javax.jms.TopicConnection;
 import javax.jms.TopicConnectionFactory;
-import javax.jms.TopicPublisher;
 import javax.jms.TopicSession;
+import javax.jms.TopicSubscriber;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.epam.mentorship.jms.consumer.app.handler.ActivityHandler;
+import com.epam.mentorship.jms.consumer.app.handler.AuthenticationHandler;
+
 @Service
-public class PublishService {
+public class ConsumerServiceInitializer {
     public static final String JNDI_FACTORY = "org.apache.activemq.jndi."
             + "ActiveMQInitialContextFactory";
     public static final String JMS_FACTORY = "ConnectionFactory";
@@ -27,11 +30,12 @@ public class PublishService {
             + "activityDestination";
     public static final String DEFAULT_URL = "tcp://localhost:61616";
     public static final int AUTH_MESSAGE_PRIORITY = 7;
-    private static final long MESSAGE_EXPIRATION_PERIOD = 60000 * 30;
 
-    private TopicSession pubSession;
-    private TopicPublisher authPublisher;
-    private TopicPublisher activityPublisher;
+    @Autowired
+    private ActivityHandler activityHandler;
+    @Autowired
+    private AuthenticationHandler authHandler;
+
     private TopicConnection connection;
 
     @PostConstruct
@@ -41,18 +45,24 @@ public class PublishService {
         env.put(Context.PROVIDER_URL, DEFAULT_URL);
 
         InitialContext jndi = new InitialContext(env);
+
         TopicConnectionFactory conFactory = (TopicConnectionFactory) jndi
                 .lookup(JMS_FACTORY);
-
         connection = conFactory.createTopicConnection();
-        pubSession = connection.createTopicSession(false,
-                Session.AUTO_ACKNOWLEDGE);
+        connection.setClientID("default_auth_subscriber");
+        TopicSession subSession = connection.createTopicSession(false,
+                Session.CLIENT_ACKNOWLEDGE);
 
         Topic authTopic = (Topic) jndi.lookup(AUTH_TOPIC);
-        authPublisher = pubSession.createPublisher(authTopic);
+        Topic activityTopic = (Topic) jndi.lookup(ACTIVITY_TOPIC);
 
-        Topic actTopic = (Topic) jndi.lookup(ACTIVITY_TOPIC);
-        activityPublisher = pubSession.createPublisher(actTopic);
+        TopicSubscriber authSubscriber = subSession.createDurableSubscriber(
+                authTopic, "default_auth_subscriber", "success = 'true'", true);
+        TopicSubscriber activitySubscriber = subSession
+                .createSubscriber(activityTopic);
+
+        authSubscriber.setMessageListener(authHandler);
+        activitySubscriber.setMessageListener(activityHandler);
 
         connection.start();
     }
@@ -60,33 +70,5 @@ public class PublishService {
     @PreDestroy
     public void close() throws JMSException {
         connection.close();
-    }
-
-    public void trackAuth(final String text,
-            final Boolean successfulOperation) {
-        try {
-            TextMessage message = track(text);
-            message.setBooleanProperty("success", successfulOperation);
-            message.setJMSPriority(AUTH_MESSAGE_PRIORITY);
-            authPublisher.publish(message);
-        } catch (JMSException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void trackActivity(final String text) {
-        try {
-            TextMessage message = track(text);
-            activityPublisher.publish(message);
-        } catch (JMSException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private TextMessage track(final String text) throws JMSException {
-        TextMessage message = pubSession.createTextMessage();
-        message.setJMSExpiration(MESSAGE_EXPIRATION_PERIOD);
-        message.setText(text);
-        return message;
     }
 }
