@@ -28,7 +28,7 @@ public class EntityManagerAspect {
                     getActionClass(joinPoint));
         } catch (IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

@@ -5,7 +5,8 @@ import java.util.List;
 
 import com.epam.mentorship.model.BaseEntity;
 
-public interface GenericDao<T extends BaseEntity<ID>, ID> extends Serializable {
+public interface GenericDao<T extends BaseEntity<ID>, ID extends Serializable>
+        extends Serializable {
 
     T save(T entity);
 

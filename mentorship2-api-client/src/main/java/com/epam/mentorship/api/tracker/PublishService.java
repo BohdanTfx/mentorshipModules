@@ -14,6 +14,7 @@ import javax.jms.TopicPublisher;
 import javax.jms.TopicSession;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,7 @@ public class PublishService {
             + "activityDestination";
     public static final String DEFAULT_URL = "tcp://localhost:61616";
     public static final int AUTH_MESSAGE_PRIORITY = 7;
-    private static final long MESSAGE_EXPIRATION_PERIOD = 60000 * 30;
+    private static final long MESSAGE_EXPIRATION_PERIOD = 60000L * 30L;
 
     private TopicSession pubSession;
     private TopicPublisher authPublisher;
@@ -35,7 +36,7 @@ public class PublishService {
     private TopicConnection connection;
 
     @PostConstruct
-    public void init() throws Exception {
+    public void init() throws NamingException, JMSException {
         Hashtable<String, String> env = new Hashtable<>();
         env.put(Context.INITIAL_CONTEXT_FACTORY, JNDI_FACTORY);
         env.put(Context.PROVIDER_URL, DEFAULT_URL);

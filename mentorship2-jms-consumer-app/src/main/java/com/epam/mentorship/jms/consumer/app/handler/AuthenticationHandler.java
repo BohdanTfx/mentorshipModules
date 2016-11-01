@@ -26,7 +26,7 @@ public class AuthenticationHandler implements MessageListener {
             logEntryService.logEntry(log);
             textMessage.acknowledge();
         } catch (JMSException jmse) {
-            jmse.printStackTrace();
+            throw new RuntimeException(jmse);
         }
     }
 

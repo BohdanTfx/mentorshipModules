@@ -27,7 +27,7 @@ public class ActivityHandler implements MessageListener {
             logEntryService.logEntry(log);
             textMessage.acknowledge();
         } catch (JMSException jmse) {
-            jmse.printStackTrace();
+            throw new RuntimeException(jmse);
         }
     }
 

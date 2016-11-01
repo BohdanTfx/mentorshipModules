@@ -10,7 +10,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @MappedSuperclass
-public abstract class BaseEntity<ID> implements Serializable {
+public abstract class BaseEntity<ID extends Serializable>
+        implements Serializable {
     private static final long serialVersionUID = -6444232627838685383L;
     @Id
     @GeneratedValue
