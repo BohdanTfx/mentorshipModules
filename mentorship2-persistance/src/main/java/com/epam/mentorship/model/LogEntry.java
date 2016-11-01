@@ -12,11 +12,13 @@ import com.epam.mentorship.aspect.annotation.BeforeSave;
 @Table(
         name = "log_entry")
 public class LogEntry extends BaseEntity<Long> {
+    private static final int DESCRIPTION_MAX_LENGTH = 3000;
     private static final long serialVersionUID = -5145006007646402468L;
     @Column(
             nullable = false)
     private String title;
-    @Column(length = 3000)
+    @Column(
+            length = DESCRIPTION_MAX_LENGTH)
     private String description;
     @Column
     private Date logDate;
