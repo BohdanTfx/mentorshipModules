@@ -23,6 +23,7 @@ import com.epam.mentorship.jms.consumer.app.handler.AuthenticationHandler;
 
 @Service
 public class ConsumerServiceInitializer {
+    private static final String DEFAULT_AUTH_SUBSCRIBER = "default_auth_subscriber";
     public static final String JNDI_FACTORY = "org.apache.activemq.jndi."
             + "ActiveMQInitialContextFactory";
     public static final String JMS_FACTORY = "ConnectionFactory";
@@ -38,6 +39,9 @@ public class ConsumerServiceInitializer {
     private AuthenticationHandler authHandler;
 
     private TopicConnection connection;
+    private TopicSession subSession;
+    private TopicSubscriber activitySubscriber;
+    private TopicSubscriber authSubscriber;
 
     @PostConstruct
     public void init() throws NamingException, JMSException {
@@ -50,16 +54,16 @@ public class ConsumerServiceInitializer {
         TopicConnectionFactory conFactory = (TopicConnectionFactory) jndi
                 .lookup(JMS_FACTORY);
         connection = conFactory.createTopicConnection();
-        connection.setClientID("default_auth_subscriber");
-        TopicSession subSession = connection.createTopicSession(false,
+        connection.setClientID(DEFAULT_AUTH_SUBSCRIBER);
+        subSession = connection.createTopicSession(false,
                 Session.CLIENT_ACKNOWLEDGE);
 
         Topic authTopic = (Topic) jndi.lookup(AUTH_TOPIC);
         Topic activityTopic = (Topic) jndi.lookup(ACTIVITY_TOPIC);
 
-        TopicSubscriber authSubscriber = subSession.createDurableSubscriber(
-                authTopic, "default_auth_subscriber", "success = 'true'", true);
-        TopicSubscriber activitySubscriber = subSession
+        authSubscriber = subSession.createDurableSubscriber(
+                authTopic, DEFAULT_AUTH_SUBSCRIBER, "success = TRUE", true);
+        activitySubscriber = subSession
                 .createSubscriber(activityTopic);
 
         authSubscriber.setMessageListener(authHandler);
@@ -70,6 +74,9 @@ public class ConsumerServiceInitializer {
 
     @PreDestroy
     public void close() throws JMSException {
+        authSubscriber.close();
+        activitySubscriber.close();
+        subSession.unsubscribe(DEFAULT_AUTH_SUBSCRIBER);
         connection.close();
     }
 }

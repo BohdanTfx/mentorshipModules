@@ -1,5 +1,6 @@
+========================Spring MVC endpoints=========================
+
 List of API url and request body (if available).
-Before each url there will be code (JVX) that means available response types: J for json, V for html views, X for xml. Example of urls: url.json, url.xml, url
 
 	Get all users
 	MVC: http://localhost:8080/mentorship2-presentation/users (GET)
@@ -70,3 +71,16 @@ Before each url there will be code (JVX) that means available response types: J 
 	Get statistic of success completions (e.g. % of people who completed the whole phase and not ended up in the middle) per user-selected period of time.
 	MVC: http://localhost:8080/mentorship2-presentation/mentorship/participants/statistic (GET)
 	REST: http://localhost:8080/mentorship2-rest/api/mentorship/participants/statistic (GET)
+
+===========================JMS task===============================
+
+	1.Install and run ActiveMQ
+		1.1.JMS task consist from two parts: Consumer app (jms-consumer-app module) and Publisher app (tracker package in api-client module)
+		1.2.In case if topics were not created automatically create them manually (authDestination, activityDestination topics)
+		1.3.Create durable subscriber fro authDestination topic with following name: default_auth_subscriber
+	2.New endpoints:
+		2.1.http://localhost:8080/mentorship2-presentation/auth/login to login
+		2.2.http://localhost:8080/mentorship2-presentation/auth/logout to logout
+	3.You may call any API endpoint from presentation module (MVC) endpoint to check page loading activity logic
+	4.You may review all logs catched by JMS listeners into log_entry table
+	
