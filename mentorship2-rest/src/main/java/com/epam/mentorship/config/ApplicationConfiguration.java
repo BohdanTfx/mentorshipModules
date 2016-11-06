@@ -10,8 +10,8 @@ import javax.xml.bind.Marshaller;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.http.MediaType;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -19,6 +19,7 @@ import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
@@ -30,11 +31,11 @@ import com.epam.mentorship.model.Mentor;
 import com.epam.mentorship.model.MentorshipProgram;
 import com.epam.mentorship.model.User;
 
-@ImportResource("classpath:persistance-config.xml")
 @ComponentScan("com.epam.mentorship")
 @EnableWebMvc
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
+@Configuration
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
     private static final Logger LOG = Logger
             .getLogger(ApplicationConfiguration.class);
@@ -70,5 +71,11 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 
         resolver.setDefaultViews(defaultViews);
         return resolver;
+    }
+
+    @Override
+    public void configureDefaultServletHandling(
+            final DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
     }
 }

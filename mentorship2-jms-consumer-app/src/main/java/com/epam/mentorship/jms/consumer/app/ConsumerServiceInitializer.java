@@ -23,7 +23,8 @@ import com.epam.mentorship.jms.consumer.app.handler.AuthenticationHandler;
 
 @Service
 public class ConsumerServiceInitializer {
-    private static final String DEFAULT_AUTH_SUBSCRIBER = "default_auth_subscriber";
+    private static final String DEFAULT_AUTH_SUBSCRIBER = "default_auth"
+            + "_subscriber";
     public static final String JNDI_FACTORY = "org.apache.activemq.jndi."
             + "ActiveMQInitialContextFactory";
     public static final String JMS_FACTORY = "ConnectionFactory";

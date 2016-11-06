@@ -3,16 +3,16 @@
 List of API url and request body (if available).
 
 	Get all users
-	MVC: http://localhost:8080/mentorship2-presentation/users (GET)
-	REST: http://localhost:8080/mentorship2-rest/api/users (GET)
+	MVC: http://localhost:8080/users (GET)
+	REST: http://localhost:8080/api/users (GET)
 
 	Get user by id
-	MVC: http://localhost:8080/mentorship2-presentation/users/5 (GET)
-	REST: http://localhost:8080/mentorship2-rest/api/users/5 (GET)
+	MVC: http://localhost:8080/users/5 (GET)
+	REST: http://localhost:8080/api/users/5 (GET)
 
 	Create user
-	MVC: http://localhost:8080/mentorship2-presentation/users (POST)
-	REST: http://localhost:8080/mentorship2-rest/api/users (POST)
+	MVC: http://localhost:8080/users (POST)
+	REST: http://localhost:8080/api/users (POST)
 	MVC/REST body example: 	{
 							"firstName" : "John",
 							"lastName": "Doe",
@@ -21,56 +21,56 @@ List of API url and request body (if available).
 						}
 
 	Create mentor
-	MVC: http://localhost:8080/mentorship2-presentation/mentorship/participants/18/mentor?userId=15 (POST)
-	REST: http://localhost:8080/mentorship2-rest/api/mentorship/participants/18/mentor?userId=15 (POST)
+	MVC: http://localhost:8080/mentorship/participants/18/mentor?userId=15 (POST)
+	REST: http://localhost:8080/api/mentorship/participants/18/mentor?userId=15 (POST)
 
 	Get mentor
-	MVC: http://localhost:8080/mentorship2-presentation/mentorship/participants/mentor/19 (GET)
-	REST: http://localhost:8080/mentorship2-rest/api/mentorship/participants/mentor/19 (GET)
+	MVC: http://localhost:8080/mentorship/participants/mentor/19 (GET)
+	REST: http://localhost:8080/api/mentorship/participants/mentor/19 (GET)
 
 	Assign mentees for mentor
-	MVC: http://localhost:8080/mentorship2-presentation/mentorship/participants/mentor/19/mentees?menteesId=20,21 (POST)
-	REST: http://localhost:8080/mentorship2-rest/api/mentorship/participants/mentor/19/mentees?menteesId=20,21 (POST)
+	MVC: http://localhost:8080/mentorship/participants/mentor/19/mentees?menteesId=20,21 (POST)
+	REST: http://localhost:8080/api/mentorship/participants/mentor/19/mentees?menteesId=20,21 (POST)
 
 	Remove mentee from mentor
-	MVC: http://localhost:8080/mentorship2-presentation/mentorship/participants/mentor/19/mentees/20 (GET)
-	REST: http://localhost:8080/mentorship2-rest/api/mentorship/participants/mentor/19/mentees/20 (DELETE)
+	MVC: http://localhost:8080/mentorship/participants/mentor/19/mentees/20 (GET)
+	REST: http://localhost:8080/api/mentorship/participants/mentor/19/mentees/20 (DELETE)
 
 	Get mentee
-	MVC: http://localhost:8080/mentorship2-presentation/mentorship/participants/mentee/22 (GET)
-	REST: http://localhost:8080/mentorship2-rest/api/mentorship/participants/mentee/22 (GET)
+	MVC: http://localhost:8080/mentorship/participants/mentee/22 (GET)
+	REST: http://localhost:8080/api/mentorship/participants/mentee/22 (GET)
 
 	Create mentee
-	MVC: http://localhost:8080/mentorship2-presentation/mentorship/participants/18/mentee?userId=9 (POST)
-	REST: http://localhost:8080/mentorship2-rest/api/mentorship/participants/18/mentee?userId=9 (POST)
+	MVC: http://localhost:8080/mentorship/participants/18/mentee?userId=9 (POST)
+	REST: http://localhost:8080/api/mentorship/participants/18/mentee?userId=9 (POST)
 
 	Assign mentor
-	MVC: http://localhost:8080/mentorship2-presentation/mentorship/participants/mentee/21?mentorId=19 (POST)
-	REST: http://localhost:8080/mentorship2-rest/api/mentorship/participants/mentee/20?mentorId=19 (PUT)
+	MVC: http://localhost:8080/mentorship/participants/mentee/21?mentorId=19 (POST)
+	REST: http://localhost:8080/api/mentorship/participants/mentee/20?mentorId=19 (PUT)
 
 	Change mentee state (active, started, finished)
-	MVC: http://localhost:8080/mentorship2-presentation/mentorship/participants/mentee/20/state (POST)
-	REST: http://localhost:8080/mentorship2-rest/api/mentorship/participants/mentee/20/state (PUT)
+	MVC: http://localhost:8080/mentorship/participants/mentee/20/state (POST)
+	REST: http://localhost:8080/api/mentorship/participants/mentee/20/state (PUT)
 	Body example: 	{
 						"active": true,
 						"start": true
 					}
 
 	Get list of mentors who mentors more than 2 mentees at this moment (only active). 
-	MVC: http://localhost:8080/mentorship2-presentation/mentorship/participants/mentors?menteesAmount=0&onlyActive=true (GET)
-	REST: http://localhost:8080/mentorship2-rest/api/mentorship/participants/mentors?menteesAmount=0&onlyActive=true (GET)
+	MVC: http://localhost:8080/mentorship/participants/mentors?menteesAmount=0&onlyActive=true (GET)
+	REST: http://localhost:8080/api/mentorship/participants/mentors?menteesAmount=0&onlyActive=true (GET)
 
 	Get list of mentees who are currently without mentors in user-selected location. 
-	MVC: http://localhost:8080/mentorship2-presentation/mentorship/participants/mentees?location=KYIV (GET)
-	REST: http://localhost:8080/mentorship2-rest/api/mentorship/participants/mentees?location=KYIV (GET)
+	MVC: http://localhost:8080/mentorship/participants/mentees?location=KYIV (GET)
+	REST: http://localhost:8080/api/mentorship/participants/mentees?location=KYIV (GET)
 
 	Get list of all mentees and duration of their overall mentorship (counted in mentor-weeks) ordered descending with pagination. 
-	MVC: http://localhost:8080/mentorship2-presentation/mentorship/participants/mentees/filter?desc=false&start=2&amount=1 (GET)
-	REST: http://localhost:8080/mentorship2-rest/api/mentorship/participants/mentees/filter?desc=false&start=2&amount=1 (GET)
+	MVC: http://localhost:8080/mentorship/participants/mentees/filter?desc=false&start=2&amount=1 (GET)
+	REST: http://localhost:8080/api/mentorship/participants/mentees/filter?desc=false&start=2&amount=1 (GET)
 
 	Get statistic of success completions (e.g. % of people who completed the whole phase and not ended up in the middle) per user-selected period of time.
-	MVC: http://localhost:8080/mentorship2-presentation/mentorship/participants/statistic (GET)
-	REST: http://localhost:8080/mentorship2-rest/api/mentorship/participants/statistic (GET)
+	MVC: http://localhost:8080/mentorship/participants/statistic (GET)
+	REST: http://localhost:8080/api/mentorship/participants/statistic (GET)
 
 ===========================JMS task===============================
 
@@ -79,8 +79,13 @@ List of API url and request body (if available).
 		1.2.In case if topics were not created automatically create them manually (authDestination, activityDestination topics)
 		1.3.Create durable subscriber fro authDestination topic with following name: default_auth_subscriber
 	2.New endpoints:
-		2.1.http://localhost:8080/mentorship2-presentation/auth/login to login
-		2.2.http://localhost:8080/mentorship2-presentation/auth/logout to logout
+		2.1.http://localhost:8080/auth/login to login
+		2.2.http://localhost:8080/auth/logout to logout
 	3.You may call any API endpoint from presentation module (MVC) endpoint to check page loading activity logic
 	4.You may review all logs catched by JMS listeners into log_entry table
-	
+
+=============================Spring Boot================================
+
+	To run any of applications (rest or presentation) execute "mvn spring-boot:run" on it.
+	New database dump attached.
+	Presentation module support authentication and JMS features.

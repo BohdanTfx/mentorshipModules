@@ -22,6 +22,9 @@ public class LogEntry extends BaseEntity<Long> {
     @Column
     private String type;
 
+    public LogEntry() {
+    }
+
     public LogEntry(final String title, final String description,
             final String type) {
         this.title = title;
