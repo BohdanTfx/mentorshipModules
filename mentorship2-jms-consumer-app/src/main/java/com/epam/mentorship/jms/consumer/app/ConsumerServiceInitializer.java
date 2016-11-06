@@ -16,6 +16,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.epam.mentorship.jms.consumer.app.handler.ActivityHandler;
@@ -23,16 +24,18 @@ import com.epam.mentorship.jms.consumer.app.handler.AuthenticationHandler;
 
 @Service
 public class ConsumerServiceInitializer {
-    private static final String DEFAULT_AUTH_SUBSCRIBER = "default_auth"
-            + "_subscriber";
-    public static final String JNDI_FACTORY = "org.apache.activemq.jndi."
-            + "ActiveMQInitialContextFactory";
-    public static final String JMS_FACTORY = "ConnectionFactory";
-    public static final String AUTH_TOPIC = "dynamicTopics/authDestination";
-    public static final String ACTIVITY_TOPIC = "dynamicTopics/"
-            + "activityDestination";
-    public static final String DEFAULT_URL = "tcp://localhost:61616";
-    public static final int AUTH_MESSAGE_PRIORITY = 7;
+    @Value("${jms.jndi.factory}")
+    private String jndiFactory;
+    @Value("${jms.factory}")
+    private String jmsFactory;
+    @Value("${jms.topics.auth}")
+    private String authTopic;
+    @Value("${jms.topics.activity}")
+    private String activityTopic;
+    @Value("${jms.url.default}")
+    private String defaultUrl;
+    @Value("${jms.subscriber.default.auth}")
+    private String defaultAuthSubscriber;
 
     @Autowired
     private ActivityHandler activityHandler;
@@ -47,25 +50,24 @@ public class ConsumerServiceInitializer {
     @PostConstruct
     public void init() throws NamingException, JMSException {
         Hashtable<String, String> env = new Hashtable<>();
-        env.put(Context.INITIAL_CONTEXT_FACTORY, JNDI_FACTORY);
-        env.put(Context.PROVIDER_URL, DEFAULT_URL);
+        env.put(Context.INITIAL_CONTEXT_FACTORY, jndiFactory);
+        env.put(Context.PROVIDER_URL, defaultUrl);
 
         InitialContext jndi = new InitialContext(env);
 
         TopicConnectionFactory conFactory = (TopicConnectionFactory) jndi
-                .lookup(JMS_FACTORY);
+                .lookup(jmsFactory);
         connection = conFactory.createTopicConnection();
-        connection.setClientID(DEFAULT_AUTH_SUBSCRIBER);
+        connection.setClientID(defaultAuthSubscriber);
         subSession = connection.createTopicSession(false,
                 Session.CLIENT_ACKNOWLEDGE);
 
-        Topic authTopic = (Topic) jndi.lookup(AUTH_TOPIC);
-        Topic activityTopic = (Topic) jndi.lookup(ACTIVITY_TOPIC);
+        Topic authTopic = (Topic) jndi.lookup(this.authTopic);
+        Topic activityTopic = (Topic) jndi.lookup(this.activityTopic);
 
-        authSubscriber = subSession.createDurableSubscriber(
-                authTopic, DEFAULT_AUTH_SUBSCRIBER, "success = TRUE", true);
-        activitySubscriber = subSession
-                .createSubscriber(activityTopic);
+        authSubscriber = subSession.createDurableSubscriber(authTopic,
+                defaultAuthSubscriber, "success = TRUE", true);
+        activitySubscriber = subSession.createSubscriber(activityTopic);
 
         authSubscriber.setMessageListener(authHandler);
         activitySubscriber.setMessageListener(activityHandler);
@@ -77,7 +79,7 @@ public class ConsumerServiceInitializer {
     public void close() throws JMSException {
         authSubscriber.close();
         activitySubscriber.close();
-        subSession.unsubscribe(DEFAULT_AUTH_SUBSCRIBER);
+        subSession.unsubscribe(defaultAuthSubscriber);
         connection.close();
     }
 }

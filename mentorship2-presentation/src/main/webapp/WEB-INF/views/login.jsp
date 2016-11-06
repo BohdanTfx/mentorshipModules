@@ -10,7 +10,7 @@
 <body>
 	<h2>Login!</h2>
 	<form
-		action="http://localhost:8080/mentorship2-presentation/auth/login"
+		action="http://localhost:8080/auth/login"
 		method="post">
 		<div>
 			<label for="username">Username:</label> <input name="username"

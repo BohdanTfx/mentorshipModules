@@ -16,19 +16,25 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PublishService {
-    public static final String JNDI_FACTORY = "org.apache.activemq.jndi."
-            + "ActiveMQInitialContextFactory";
-    public static final String JMS_FACTORY = "ConnectionFactory";
-    public static final String AUTH_TOPIC = "dynamicTopics/authDestination";
-    public static final String ACTIVITY_TOPIC = "dynamicTopics/"
-            + "activityDestination";
-    public static final String DEFAULT_URL = "tcp://localhost:61616";
-    public static final int AUTH_MESSAGE_PRIORITY = 7;
-    private static final long MESSAGE_EXPIRATION_PERIOD = 60000L * 30L;
+    @Value("${jms.jndi.factory}")
+    private String jndiFactory;
+    @Value("${jms.factory}")
+    private String jmsFactory;
+    @Value("${jms.topics.auth}")
+    private String authTopic;
+    @Value("${jms.topics.activity}")
+    private String activityTopic;
+    @Value("${jms.url.default}")
+    private String defaultUrl;
+    @Value("${jms.message.priority.auth}")
+    private int authMessagePriority;
+    @Value("${jms.message.expiration.period}")
+    private long messageExpirationPeriod;
 
     private TopicSession pubSession;
     private TopicPublisher authPublisher;
@@ -38,21 +44,21 @@ public class PublishService {
     @PostConstruct
     public void init() throws NamingException, JMSException {
         Hashtable<String, String> env = new Hashtable<>();
-        env.put(Context.INITIAL_CONTEXT_FACTORY, JNDI_FACTORY);
-        env.put(Context.PROVIDER_URL, DEFAULT_URL);
+        env.put(Context.INITIAL_CONTEXT_FACTORY, jndiFactory);
+        env.put(Context.PROVIDER_URL, defaultUrl);
 
         InitialContext jndi = new InitialContext(env);
         TopicConnectionFactory conFactory = (TopicConnectionFactory) jndi
-                .lookup(JMS_FACTORY);
+                .lookup(jmsFactory);
 
         connection = conFactory.createTopicConnection();
         pubSession = connection.createTopicSession(false,
                 Session.AUTO_ACKNOWLEDGE);
 
-        Topic authTopic = (Topic) jndi.lookup(AUTH_TOPIC);
+        Topic authTopic = (Topic) jndi.lookup(this.authTopic);
         authPublisher = pubSession.createPublisher(authTopic);
 
-        Topic actTopic = (Topic) jndi.lookup(ACTIVITY_TOPIC);
+        Topic actTopic = (Topic) jndi.lookup(activityTopic);
         activityPublisher = pubSession.createPublisher(actTopic);
 
         connection.start();
@@ -68,7 +74,7 @@ public class PublishService {
         try {
             TextMessage message = track(text);
             message.setBooleanProperty("success", successfulOperation);
-            message.setJMSPriority(AUTH_MESSAGE_PRIORITY);
+            message.setJMSPriority(authMessagePriority);
             authPublisher.publish(message);
         } catch (JMSException e) {
             throw new RuntimeException(e);
@@ -86,7 +92,7 @@ public class PublishService {
 
     private TextMessage track(final String text) throws JMSException {
         TextMessage message = pubSession.createTextMessage();
-        message.setJMSExpiration(MESSAGE_EXPIRATION_PERIOD);
+        message.setJMSExpiration(messageExpirationPeriod);
         message.setText(text);
         return message;
     }
