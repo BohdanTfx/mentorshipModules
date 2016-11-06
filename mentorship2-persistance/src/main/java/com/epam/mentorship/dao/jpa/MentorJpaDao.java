@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.springframework.stereotype.Repository;
+
 import com.epam.mentorship.dao.MentorDao;
 import com.epam.mentorship.model.Mentor;
 
+@Repository
 public class MentorJpaDao extends GenericJpaDao<Mentor, Long>
         implements MentorDao {
     private static final long serialVersionUID = 8253199488344079950L;

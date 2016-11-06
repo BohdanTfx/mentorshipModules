@@ -7,10 +7,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.springframework.stereotype.Repository;
+
 import com.epam.mentorship.dao.MenteeDao;
 import com.epam.mentorship.enums.Location;
 import com.epam.mentorship.model.Mentee;
 
+@Repository
 public class MenteeJpaDao extends GenericJpaDao<Mentee, Long>
         implements MenteeDao {
     private static final long serialVersionUID = 7053996539111610993L;

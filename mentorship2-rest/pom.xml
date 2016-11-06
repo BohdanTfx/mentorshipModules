@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.epam</groupId>
-		<artifactId>mentorship2</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+<!-- 	<parent> -->
+<!-- 		<groupId>com.epam</groupId> -->
+<!-- 		<artifactId>mentorship2</artifactId> -->
+<!-- 		<version>0.0.1-SNAPSHOT</version> -->
+<!-- 	</parent> -->
 
 	<artifactId>mentorship2-rest</artifactId>
 	<packaging>war</packaging>
@@ -39,11 +39,6 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
 		</dependency>
 
 		<dependency>

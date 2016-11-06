@@ -4,13 +4,10 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 import com.epam.mentorship.aspect.annotation.BeforeSave;
 
 @Entity
-@Table(
-        name = "log_entry")
 public class LogEntry extends BaseEntity<Long> {
     private static final int DESCRIPTION_MAX_LENGTH = 3000;
     private static final long serialVersionUID = -5145006007646402468L;
