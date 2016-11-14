@@ -8,7 +8,7 @@ import javax.jms.TextMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.epam.mentorship.model.LogEntry;
+import com.epam.mentorship.model.mongo.LogEntry;
 import com.epam.mentorship.service.LogEntryService;
 
 @Service

@@ -5,16 +5,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.epam.mentorship.dao.LogEntryDao;
+
 @ComponentScan("com.epam.mentorship")
 @EnableWebMvc
 @EnableAspectJAutoProxy
 @Configuration
+@EnableMongoRepositories(
+        basePackageClasses = LogEntryDao.class)
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
     private static final Logger LOG = Logger
             .getLogger(ApplicationConfiguration.class);

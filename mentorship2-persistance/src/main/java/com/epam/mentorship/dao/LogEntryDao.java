@@ -1,7 +1,9 @@
 package com.epam.mentorship.dao;
 
-import com.epam.mentorship.model.LogEntry;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface LogEntryDao extends GenericDao<LogEntry, Long> {
+import com.epam.mentorship.model.mongo.LogEntry;
+
+public interface LogEntryDao extends MongoRepository<LogEntry, Long> {
 
 }

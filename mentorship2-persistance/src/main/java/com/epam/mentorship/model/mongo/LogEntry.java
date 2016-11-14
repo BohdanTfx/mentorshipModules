@@ -1,25 +1,19 @@
-package com.epam.mentorship.model;
+package com.epam.mentorship.model.mongo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import org.springframework.data.annotation.Id;
 
 import com.epam.mentorship.aspect.annotation.BeforeSave;
 
-@Entity
-public class LogEntry extends BaseEntity<Long> {
-    private static final int DESCRIPTION_MAX_LENGTH = 3000;
+public class LogEntry implements Serializable {
     private static final long serialVersionUID = -5145006007646402468L;
-    @Column(
-            nullable = false)
+    @Id
+    private Long id;
     private String title;
-    @Column(
-            length = DESCRIPTION_MAX_LENGTH)
     private String description;
-    @Column
     private Date logDate;
-    @Column
     private String type;
 
     public LogEntry() {
@@ -72,6 +66,14 @@ public class LogEntry extends BaseEntity<Long> {
 
     public void setType(final String type) {
         this.type = type;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(final Long id) {
+        this.id = id;
     }
 
 }
