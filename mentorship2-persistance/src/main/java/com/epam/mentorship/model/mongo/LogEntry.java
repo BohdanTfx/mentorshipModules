@@ -5,8 +5,6 @@ import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 
-import com.epam.mentorship.aspect.annotation.BeforeSave;
-
 public class LogEntry implements Serializable {
     private static final long serialVersionUID = -5145006007646402468L;
     @Id
@@ -31,7 +29,6 @@ public class LogEntry implements Serializable {
         this.description = description;
     }
 
-    @BeforeSave
     public void prePersist() {
         logDate = new Date();
     }
