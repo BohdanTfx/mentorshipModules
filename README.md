@@ -98,4 +98,5 @@ To run project follow next steps:
 	2. Launch MySQL, ActiveMQ as described in previous topics
 	3. Create 'mentorship_logs' database. If you want to use another database name please change appropriate property in application.properties
 	4. Import dump using following command: mongoimport --db mentorship_logs --collection logEntry --file logs.json
-	5. You can access logs by next URL: http://localhost:8080/logs?type=auth. Note that 'type' parameter is optional
+	5. Run presentation project via Spring Boot
+	6. You can access logs by next URL: http://localhost:8080/logs?type=auth. Note that 'type' parameter is optional
