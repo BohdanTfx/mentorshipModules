@@ -20,6 +20,7 @@ import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -43,6 +44,11 @@ import com.epam.mentorship.model.User;
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
     private static final Logger LOG = Logger
             .getLogger(ApplicationConfiguration.class);
+
+    @Override
+    public void addCorsMappings(final CorsRegistry registry) {
+        registry.addMapping("/**");
+    }
 
     @Override
     public void configureContentNegotiation(

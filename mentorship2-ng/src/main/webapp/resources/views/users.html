@@ -1,11 +1,7 @@
-<div class="section">
-    <h3>{{headingTitle}}</h3>
-    <div>
-        <ul type="square">
-            <li>Luke</li>
-            <li>Darth</li>
-            <li>Anakin</li>
-            <li>Leia</li>
-        </ul>
-    </div>
+<div class="container">
+	<div ng-repeat="user in users" class="list-group">
+		<a href="#" class="list-group-item"><span><b>{{user.firstName}}
+					{{user.lastName}}</b></span> <span class="badge">{{user.jobTitle}}</span>
+			<div>Date of birth: {{user.dateOfBirth | date: 'mediumDate'}}</div></a>
+	</div>
 </div>
