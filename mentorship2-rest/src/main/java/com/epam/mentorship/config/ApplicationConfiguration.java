@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.http.MediaType;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.servlet.view.xml.MarshallingView;
 
+import com.epam.mentorship.dao.LogEntryDao;
 import com.epam.mentorship.model.Mentee;
 import com.epam.mentorship.model.Mentor;
 import com.epam.mentorship.model.MentorshipProgram;
@@ -36,6 +38,8 @@ import com.epam.mentorship.model.User;
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
 @Configuration
+@EnableMongoRepositories(
+        basePackageClasses = LogEntryDao.class)
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
     private static final Logger LOG = Logger
             .getLogger(ApplicationConfiguration.class);
@@ -55,7 +59,7 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
         LOG.info("content negotiation view resolvers configuration");
 
         ContentNegotiatingViewResolver resolver
-            = new ContentNegotiatingViewResolver();
+        = new ContentNegotiatingViewResolver();
         resolver.setContentNegotiationManager(manager);
 
         List<View> defaultViews = new ArrayList<>();
