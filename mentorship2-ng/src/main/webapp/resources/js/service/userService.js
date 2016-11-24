@@ -4,4 +4,8 @@ app.service('userService', function($http, commons) {
 	service.getAllUsers = function() {
 		return $http.get(commons.getServerUrl() + "api/users");
 	}
+
+	service.getUser = function(userId) {
+		return $http.get(commons.getServerUrl() + "api/users/" + userId);
+	}
 });

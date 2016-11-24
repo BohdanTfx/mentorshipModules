@@ -1,7 +1,6 @@
-app.controller('userController', function($scope, userService) {
-	$scope.users = {};
-
-	userService.getAllUsers().success(function(data, status, headers, config) {
-		$scope.users = data.body;
-	});
+app.controller('userController', function($scope, $routeParams, userService) {
+	userService.getUser($routeParams.userId).success(
+			function(data, status, headers, config) {
+				$scope.user = data.body;
+			});
 });
