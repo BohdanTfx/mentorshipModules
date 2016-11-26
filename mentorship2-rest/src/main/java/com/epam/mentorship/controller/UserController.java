@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @RequestMapping(
-            path = "/{id}", method = RequestMethod.POST)
+            path = "/{id}", method = RequestMethod.PUT)
     public ApiResponse<User> updateUser(@PathVariable final Long id,
             @RequestBody @Valid final UserDto userDto,
             final BindingResult bindingResult, final Model model) {

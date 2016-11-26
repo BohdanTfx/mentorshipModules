@@ -1,5 +1,43 @@
 <div class="container">
-	<span><b>{{user.firstName}} {{user.lastName}}</b></span> <span
-		class="badge">{{user.jobTitle}}</span>
-	<div>Date of birth: {{user.dateOfBirth | date: 'mediumDate'}}</div>
+	<div>
+		<button ng-click="switchEditMode()" class="btn btn-info
+		col-xs-12">{{edit.mode
+			== false ? 'Switch to edit mode' : 'Save changes' }}</button>
+	</div>
+	<div ng-if="!edit.mode" class="col-xs-12">
+		<span>
+			<b>{{user.firstName}} {{user.lastName}}</b>
+		</span>
+		<span class="badge">{{user.jobTitle}}</span>
+		<div>Date of birth: {{user.dateOfBirth | date: 'mediumDate'}}</div>
+	</div>
+	<div ng-if="edit.mode" class="col-xs-12">
+		<form>
+			<div class="form-group">
+				<label for="firstName">First name:</label> <input required
+					ng-model="userClone.firstName" class="form-control" id="firstName">
+			</div>
+			<div class="form-group">
+				<label for="lastName">Last name:</label> <input required
+					ng-model="userClone.lastName" class="form-control" id="lastName">
+			</div>
+			<div class="form-group">
+				<label for="dateOfBirth">Date of birth:</label> <input type="date"
+					required ng-model="userClone.dateOfBirth" class="form-control"
+					id="dateOfBirth">
+			</div>
+			<div class="form-group">
+				<label for="jobTitle">Job title:</label> <select
+					class="form-control" id="jobTitle" ng-model="userClone.jobTitle">
+					<option value="JUNIOR">JUNIOR</option>
+					<option value="MIDDLE">MIDDLE</option>
+					<option value="SENIOR">SENIOR</option>
+					<option value="LEAD">LEAD</option>
+					<option value="CHIEF">CHIEF</option>
+				</select>
+			</div>
+			<button class="btn btn-default" ng-click="updateUser()">Update
+				user</button>
+		</form>
+	</div>
 </div>

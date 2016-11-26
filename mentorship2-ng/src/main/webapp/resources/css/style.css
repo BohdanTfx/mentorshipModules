@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+
+.link:HOVER {
+	text-decoration: underline;
+	cursor: pointer;
+}

@@ -16,6 +16,14 @@ app.service('userService', function($http, commons) {
 		});
 	}
 
+	service.updateUser = function(userId, user) {
+		return $http({
+			method : 'PUT',
+			url : commons.getServerUrl() + "api/users/" + userId,
+			data : user
+		});
+	}
+
 	service.createUser = function(user) {
 		return $http.post(commons.getServerUrl() + "api/users", user);
 	}

@@ -1,7 +1,7 @@
 <div class="container">
 	<div ng-repeat="user in users" class="list-group">
 		<a class="list-group-item"> <span class="col-sm-8">
-				<span ng-click="goToUser(user.id)">
+				<span ng-click="goToUser(user.id)" class="link">
 					<b>{{user.firstName}} {{user.lastName}}</b>
 					<span class="badge">{{user.jobTitle}}</span>
 				</span>
