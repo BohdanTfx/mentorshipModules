@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -47,7 +48,9 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addCorsMappings(final CorsRegistry registry) {
-        registry.addMapping("/**");
+        registry.addMapping("/**").allowedMethods(HttpMethod.GET.name(),
+                HttpMethod.POST.name(), HttpMethod.PUT.name(),
+                HttpMethod.DELETE.name());
     }
 
     @Override

@@ -1,0 +1,29 @@
+<div class="container">
+	<form>
+		<div class="form-group">
+			<label for="firstName">First name:</label> <input required
+				ng-model="user.firstName" class="form-control" id="firstName">
+		</div>
+		<div class="form-group">
+			<label for="lastName">Last name:</label> <input required
+				ng-model="user.lastName" class="form-control" id="lastName">
+		</div>
+		<div class="form-group">
+			<label for="dateOfBirth">Date of birth:</label> <input type="date"
+				required ng-model="user.dateOfBirth" class="form-control"
+				id="dateOfBirth">
+		</div>
+		<div class="form-group">
+			<label for="jobTitle">Job title:</label> <select class="form-control"
+				id="jobTitle" ng-model="user.jobTitle">
+				<option value="JUNIOR">JUNIOR</option>
+				<option value="MIDDLE">MIDDLE</option>
+				<option value="SENIOR">SENIOR</option>
+				<option value="LEAD">LEAD</option>
+				<option value="CHIEF">CHIEF</option>
+			</select>
+		</div>
+		<button class="btn btn-default" ng-click="createUser()">Create
+			user</button>
+	</form>
+</div>

@@ -1,5 +1,5 @@
-app.controller('userController', function($scope, $routeParams, userService) {
-	userService.getUser($routeParams.userId).success(
+app.controller('userController', function($scope, $stateParams, userService) {
+	userService.getUser($stateParams.userId).success(
 			function(data, status, headers, config) {
 				$scope.user = data.body;
 			});

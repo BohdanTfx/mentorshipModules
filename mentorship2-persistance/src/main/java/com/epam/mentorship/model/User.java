@@ -48,8 +48,7 @@ public class User extends BaseEntity<Long> {
     private Date lastModified;
     @JoinColumn(
             name = "modificator_id")
-    @ManyToOne(
-            cascade = CascadeType.ALL)
+    @ManyToOne
     @XmlTransient
     private User lastModifiedByUser;
     @JoinColumn(

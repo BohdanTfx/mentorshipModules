@@ -1,7 +1,13 @@
 <div class="container">
 	<div ng-repeat="user in users" class="list-group">
-		<a href="#/users/{{user.id}}" class="list-group-item"><span><b>{{user.firstName}}
-					{{user.lastName}}</b></span> <span class="badge">{{user.jobTitle}}</span>
+		<a class="list-group-item"> <span class="col-sm-8">
+				<span ng-click="goToUser(user.id)">
+					<b>{{user.firstName}} {{user.lastName}}</b>
+					<span class="badge">{{user.jobTitle}}</span>
+				</span>
+			</span> <span class="pull-right">
+				<button class="btn btn-danger" ng-click="deleteUser(user)">&times;</button>
+			</span>
 			<div>Date of birth: {{user.dateOfBirth | date: 'mediumDate'}}</div></a>
 	</div>
 </div>

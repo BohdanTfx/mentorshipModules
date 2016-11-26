@@ -58,6 +58,13 @@ public class UserController {
     }
 
     @RequestMapping(
+            path = "/{id}", method = RequestMethod.DELETE)
+    public ApiResponse<User> deleteById(@PathVariable final Long id) {
+        userApiClient.delete(id);
+        return new ApiResponse<>(null);
+    }
+
+    @RequestMapping(
             method = RequestMethod.GET)
     public ApiResponse<List<User>> findUsers(final Model model) {
         return new ApiResponse<>(userApiClient.findUsers());

@@ -31,7 +31,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(final Long id) {
-        userDao.delete(userDao.getById(id));
+        User entity = userDao.getById(id);
+        entity.setLastModifiedByUser(null);
+        entity.setCreatedByUser(null);
+        userDao.update(entity);
+        userDao.delete(entity);
     }
 
     @Override

@@ -1,13 +1,19 @@
-var app = angular.module('app', [ 'ngRoute', 'ngResource' ]);
+var app = angular.module('app', [ 'ui.router', 'ngResource' ]);
 
-app.config(function($routeProvider) {
-	$routeProvider.when('/users', {
+app.config(function($stateProvider, $urlRouterProvider) {
+	$urlRouterProvider.otherwise('/users');
+
+	$stateProvider.state('users', {
+		url : '/users',
 		templateUrl : 'resources/views/users.html',
 		controller : 'usersController'
-	}).when('/users/:userId', {
+	}).state('user', {
+		url : '/user/:userId',
 		templateUrl : 'resources/views/user.html',
 		controller : 'userController'
-	}).otherwise({
-		redirectTo : '/'
+	}).state('newUser', {
+		url : '/users/create',
+		templateUrl : 'resources/views/newUser.html',
+		controller : 'newUserController'
 	});
 });
